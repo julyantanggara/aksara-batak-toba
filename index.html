@@ -166,6 +166,65 @@ dialog.modal form { display: flex; flex-direction: column; min-height: 0; }
 .popover input[type=range] { width: 100%; accent-color: var(--primary); }
 .toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 60; background: var(--text); color: var(--bg); padding: .5rem .6rem .5rem 1rem; border-radius: 12px; box-shadow: var(--shadow-lg); font-size: .9rem; display: flex; gap: .8rem; align-items: center; max-width: min(560px, calc(100vw - 32px)); }
 .toast button { font: inherit; font-weight: 700; color: inherit; background: color-mix(in srgb, var(--bg) 20%, transparent); border: 0; border-radius: 8px; padding: .3rem .7rem; cursor: pointer; }
+/* pg11 */
+/* v1.1: putaran tak terbatas (tab bergulir), penulis per putaran, pilihan kelas */
+.board-head { flex-wrap: nowrap; align-items: flex-end; }
+.board-head > div:first-child { min-width: 0; flex: 1 1 auto; }
+.rounds { display: flex; gap: .3rem; flex-wrap: nowrap; align-items: center; overflow-x: auto; max-width: 58%; padding: 2px 2px 4px; scrollbar-width: thin; }
+.round-tab { flex: none; display: inline-flex; flex-direction: column; align-items: flex-start; line-height: 1.15; padding: .25rem .7rem; border-radius: 10px; }
+.round-tab .rt-top { font-size: .8rem; font-weight: 700; white-space: nowrap; }
+.round-tab .rt-sub { font-size: .7rem; font-weight: 500; opacity: .85; white-space: nowrap; max-width: 14ch; overflow: hidden; text-overflow: ellipsis; }
+.round-tab.add { flex-direction: row; gap: .3rem; color: var(--primary); border-style: dashed; background: var(--surface); }
+.round-tab.multi:not([aria-selected="true"]) { border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+.side-h { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.side-h .icon-btn { width: 32px; min-height: 32px; color: var(--faint); }
+.side-h .icon-btn:hover { color: var(--bad); }
+.hint { font-size: .78rem; border-radius: 8px; padding: .35rem .55rem; background: var(--accent-soft); color: var(--accent); }
+.hint.warn { background: var(--warn-soft); color: var(--warn); }
+.kelas-box { display: flex; align-items: center; justify-content: space-between; gap: .6rem; border: 1px solid var(--border); border-radius: 10px; padding: .45rem .6rem; background: var(--surface-2); }
+.kelas-box b { font-size: .9rem; } .kelas-box small { display: block; color: var(--faint); font-size: .74rem; max-width: 20ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kelas-box .btn { min-height: 34px; padding: 0 .65rem; font-size: .82rem; flex: none; }
+.writers { display: grid; gap: .3rem; font-size: .84rem; }
+.writers div { display: flex; justify-content: space-between; gap: .5rem; padding: .3rem .5rem; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border); }
+.writers div b { font-weight: 650; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.writers div span { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.writers.multi div { border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); }
+/* dialog pilih kelas */
+dialog.modal.wide { width: min(980px, calc(100vw - 24px)); }
+.pick-tools { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+.pick-tools .btn { min-height: 34px; padding: 0 .7rem; font-size: .84rem; }
+.pick-tools input[type=search] { font: inherit; flex: 1 1 180px; min-height: 36px; padding: 0 .7rem; border-radius: 9px; border: 1px solid var(--border-strong); background: var(--surface); color: var(--text); }
+.pick-grp { display: grid; grid-template-columns: 7.5rem 1fr; gap: .6rem; align-items: start; padding: .45rem 0; border-top: 1px solid var(--border); }
+.pick-grp > label { display: flex; align-items: center; gap: .45rem; font: 650 1rem var(--serif); cursor: pointer; padding-top: .3rem; }
+.pick-grp > label input { width: 18px; height: 18px; accent-color: var(--primary); }
+.pick-grp > label .g { font: 1.3rem/1 var(--batak); color: var(--primary); }
+.chips { display: flex; flex-wrap: wrap; gap: .35rem; }
+.chip { font: inherit; display: inline-flex; flex-direction: column; align-items: center; min-width: 54px; padding: .25rem .45rem; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; line-height: 1.1; }
+.chip .cg { font: 1.35rem/1.15 var(--batak); color: var(--text); min-height: 1.5rem; }
+.chip .cl { font: 600 .82rem var(--serif); }
+.chip .cd { font-size: .62rem; color: var(--ok); }
+.chip[aria-pressed="true"] { border-color: var(--primary); background: var(--primary-soft); color: var(--primary); box-shadow: inset 0 0 0 1px var(--primary); }
+.chip.dim { display: none; }
+.pick-count { margin-right: auto; font-size: .88rem; font-variant-numeric: tabular-nums; }
+.opt-list { display: grid; gap: .45rem; }
+.opt { display: grid; grid-template-columns: 20px 1fr; gap: .55rem; align-items: start; border: 1px solid var(--border); border-radius: 10px; padding: .55rem .65rem; cursor: pointer; }
+.opt:has(input:checked) { border-color: var(--primary); background: var(--primary-soft); }
+.opt input { width: 18px; height: 18px; margin-top: .1rem; accent-color: var(--primary); }
+.opt small { display: block; color: var(--muted); font-size: .78rem; }
+/* ekspor per penulis */
+.wr-list { display: grid; gap: .5rem; }
+.wr { display: grid; grid-template-columns: 1fr auto; gap: .2rem .8rem; align-items: center; border: 1px solid var(--border); border-radius: 12px; padding: .6rem .75rem; background: var(--surface-2); }
+.wr b { font-size: .98rem; } .wr .meta { font-size: .8rem; color: var(--muted); }
+.wr .fname { grid-column: 1 / -1; font: .74rem ui-monospace, Consolas, monospace; color: var(--faint); overflow-wrap: anywhere; }
+.wr .acts { display: flex; gap: .35rem; grid-row: 1 / span 2; grid-column: 2; }
+.wr .acts .btn { min-height: 34px; padding: 0 .65rem; font-size: .82rem; }
+.wr.done { border-color: color-mix(in srgb, var(--ok) 50%, var(--border)); background: var(--ok-soft); }
+.wr .rn { display: flex; gap: .35rem; grid-column: 1 / -1; }
+.wr .rn input { font: inherit; flex: 1; min-height: 34px; padding: 0 .6rem; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--surface); color: var(--text); }
+.similar { display: grid; gap: .35rem; }
+.similar div { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font-size: .85rem; }
+.similar .btn { min-height: 32px; padding: 0 .6rem; font-size: .8rem; }
+
 @media (max-width: 1100px) {
   .layout { grid-template-columns: 84px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; }
   .side { grid-column: 1 / -1; max-height: 34vh; }
@@ -179,7 +238,13 @@ dialog.modal form { display: flex; flex-direction: column; min-height: 0; }
   .rail-btn { min-width: 54px; min-height: 46px; }
   .side { max-height: none; }
   .side-body { padding: .6rem .8rem; gap: .5rem; grid-template-columns: 1fr auto; align-items: end; }
-  .side-body > div:nth-child(3), #writerHelp, #allDone { display: none; }
+  .side-writers, .side-issues, #writerHelp, #allDone { display: none; }
+  .side-body > .field:nth-child(1) { grid-column: 1; grid-row: 1; }
+  .side-body > div:nth-child(3) { grid-column: 2; grid-row: 1; }
+  .side-body > .field:nth-child(2) { grid-column: 1 / -1; grid-row: 2; }
+  .board-head { flex-wrap: wrap; } .rounds { max-width: 100%; }
+  .wr { grid-template-columns: 1fr; } .wr .acts { grid-row: auto; grid-column: 1; }
+  .pick-grp { grid-template-columns: 1fr; }
   .side-body .big { font-size: 1.2rem; } .side-body .meter { margin-top: .3rem; }
   .side-foot { grid-template-columns: 1fr 1fr; padding: .6rem .8rem; }
   .side-foot .btn { padding: 0 .4rem; font-size: .8rem; white-space: nowrap; gap: .3rem; }
@@ -226,6 +291,7 @@ dialog.modal form { display: flex; flex-direction: column; min-height: 0; }
       <button class="rail-btn" type="button" role="radio" data-ph="mati" title="Sembunyikan contoh"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 4l16 16"/></svg><span>Tanpa</span></button>
     </div>
     <div class="rail-group">
+      <button class="rail-btn" id="btnPick" type="button" title="Pilih kelas aksara untuk putaran ini"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h6"/><path d="M16 16l2 2 4-4"/></svg><span>Pilih kelas</span></button>
       <button class="rail-btn" id="btnOnlyEmpty" type="button" aria-pressed="false" title="Tampilkan hanya kotak yang belum diisi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16l-6 7v6l-4 2v-8z"/></svg><span>Belum diisi</span></button>
       <button class="rail-btn" id="btnSize" type="button" title="Ukuran kotak"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 15v5h-5M4 4l6 6M20 20l-6-6"/></svg><span id="sizeLbl">Sedang</span></button>
     </div>
@@ -244,20 +310,30 @@ dialog.modal form { display: flex; flex-direction: column; min-height: 0; }
     <div class="scroll" id="scroll"><div id="board"></div></div>
   </section>
 
-  <aside class="panel side" aria-label="Ringkasan">
+  <aside class="panel side" aria-label="Ringkasan putaran">
     <div class="side-body">
       <div class="field">
-        <h3>Kode penulis</h3>
-        <input type="text" id="writer" maxlength="20" autocomplete="off" spellcheck="false" aria-describedby="writerHelp">
-        <small id="writerHelp">Boleh nama samaran/inisial. Huruf, angka, - dan _ saja. Dipakai untuk nama berkas unduhan.</small>
+        <div class="side-h"><h3>Putaran <span id="roundNo">1</span> — penulis</h3>
+          <button class="icon-btn" id="btnDelRound" type="button" title="Hapus putaran ini" aria-label="Hapus putaran ini"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button></div>
+        <input type="text" id="writer" maxlength="20" autocomplete="off" spellcheck="false" aria-describedby="writerHelp writerHint">
+        <small id="writerHelp">Nama/kode orang yang menulis putaran ini (samaran boleh). Huruf, angka, - dan _.</small>
+        <p class="hint warn" id="writerHint" hidden></p>
+      </div>
+      <div class="field">
+        <h3>Kelas di putaran ini</h3>
+        <div class="kelas-box"><div><b id="kelasTxt">Semua 117 kelas</b><small id="kelasList"></small></div><button class="btn ghost" id="btnPick2" type="button">Pilih kelas…</button></div>
       </div>
       <div>
-        <h3>Kemajuan putaran <span id="roundNo">1</span></h3>
-        <div class="big"><span id="nFilled">0</span><small> / 117 aksara</small></div>
+        <h3>Kemajuan putaran ini</h3>
+        <div class="big"><span id="nFilled">0</span><small> / <span id="nTotal">117</span> aksara</small></div>
         <div class="meter"><i id="meter"></i></div>
-        <p class="note" id="allDone" hidden style="margin-top:.6rem">Semua aksara terisi. Anda bisa mengunduh dataset, atau menambah putaran untuk contoh tulisan kedua.</p>
+        <p class="note" id="allDone" hidden style="margin-top:.6rem">Putaran ini lengkap. Unduh dataset, atau tambah putaran untuk contoh tulisan berikutnya.</p>
       </div>
-      <div>
+      <div class="side-writers">
+        <h3>Penulis &amp; jumlah set</h3>
+        <div class="writers" id="writers"></div>
+      </div>
+      <div class="side-issues">
         <h3>Perlu dicek <span id="nIssues"></span></h3>
         <div class="issues" id="issues"><p class="note">Belum ada.</p></div>
       </div>
@@ -277,48 +353,79 @@ dialog.modal form { display: flex; flex-direction: column; min-height: 0; }
   <div class="m-head"><div><h2 id="helpTitle">Panduan singkat</h2><p class="sub">Terima kasih sudah membantu mengumpulkan tulisan aksara Batak Toba!</p></div><button class="icon-btn" data-close type="button" aria-label="Tutup">×</button></div>
   <div class="m-body">
     <ol class="steps">
-      <li><b>Isi kode penulis</b> di panel kanan (boleh nama samaran). Tidak ada data lain yang diminta.</li>
-      <li><b>Tulis satu aksara di setiap kotak</b> dengan mouse, pena tablet, atau jari. Contoh samar di kotak menunjukkan aksara yang diminta — <b>tidak perlu menjiplak persis</b>, tulislah dengan gaya tangan Anda sendiri.</li>
+      <li><b>Isi nama penulis</b> di panel kanan (boleh nama samaran). Tidak ada data lain yang diminta.</li>
+      <li><b>Tulis satu aksara di setiap kotak</b> dengan mouse, pena tablet, atau jari. Contoh samar menunjukkan aksara yang diminta — <b>tidak perlu menjiplak persis</b>, tulislah dengan gaya tangan Anda sendiri.</li>
       <li>Gunakan sebagian besar kotak, tetapi <b>jangan menyentuh tepi</b>. Lengkapi dengan tanda (anak ni surat) seperti contoh.</li>
-      <li>Salah? Pakai <b>Penghapus</b>, <b>Urungkan</b>, atau tombol <b>×</b> di pojok kotak.</li>
-      <li>Tanda <b style="color:var(--warn)">!</b> berarti tulisan mungkin terlalu kecil atau terpotong — cek lagi (boleh dibiarkan).</li>
-      <li>Setelah selesai, klik <b>Unduh dataset</b> dan kirim berkas <code>.zip</code> ke peneliti<span class="kirim-ke"></span>. Ingin memberi contoh kedua? Klik <b>Tambah putaran</b>.</li>
+      <li>Salah? Pakai <b>Penghapus</b>, <b>Urungkan</b>, atau tombol <b>×</b> di pojok kotak. Tanda <b style="color:var(--warn)">!</b> = tulisan mungkin terlalu kecil/terpotong.</li>
+      <li><b>Pilih kelas</b>: bila peneliti hanya meminta beberapa aksara (mis. <i>ba, ha, na</i>), pilih kelas itu saja — kotak lain disembunyikan. Bawaannya semua 117 kelas.</li>
+      <li><b>Tambah putaran</b> untuk menulis lagi (tidak dibatasi). Setiap putaran boleh ditulis <b>orang yang berbeda</b> — ketik namanya di panel kanan. Hasilnya dipisah menjadi <b>satu zip per penulis</b>.</li>
+      <li>Setelah selesai, klik <b>Unduh dataset</b> dan kirim berkas <code>.zip</code> ke peneliti<span class="kirim-ke"></span>.</li>
     </ol>
-    <p class="note">Pekerjaan Anda <b>tersimpan otomatis di browser ini</b> — aman ditutup dan dilanjutkan nanti di komputer & browser yang sama. Semua proses terjadi di perangkat Anda; tidak ada yang dikirim ke internet.</p>
+    <p class="note">Pekerjaan Anda <b>tersimpan otomatis di browser ini</b> — aman ditutup dan dilanjutkan nanti di perangkat &amp; browser yang sama. Semua proses terjadi di perangkat Anda; tidak ada yang dikirim ke internet.</p>
     <p class="note">Pintasan: <kbd>P</kbd> pena · <kbd>E</kbd> penghapus · <kbd>Ctrl</kbd>+<kbd>Z</kbd> urungkan · <kbd>Ctrl</kbd>+<kbd>Y</kbd> ulangi · panah: pindah kotak · <kbd>Delete</kbd> kosongkan kotak</p>
   </div>
   <div class="m-foot"><small class="muted" id="verInfo" style="margin-right:auto;color:var(--faint);font-size:.75rem"></small><button class="btn primary" data-close type="button">Mulai menulis</button></div>
 </dialog>
 
-<dialog class="modal" id="exportModal" aria-labelledby="expTitle">
-  <div class="m-head"><div><h2 id="expTitle">Unduh dataset</h2><p class="sub">Hasil tulisan diubah menjadi gambar PNG 256×256 px bernama sesuai aksaranya, mis. <code>ba/ba_01.png</code>.</p></div><button class="icon-btn" data-close type="button" aria-label="Tutup">×</button></div>
+<dialog class="modal wide" id="pickModal" aria-labelledby="pickTitle">
+  <div class="m-head"><div><h2 id="pickTitle">Pilih kelas aksara</h2><p class="sub">Hanya kelas yang dipilih yang ditampilkan dan ikut diunduh di putaran ini. Cocok untuk memperbanyak data kelas tertentu.</p></div><button class="icon-btn" data-close type="button" aria-label="Tutup">×</button></div>
+  <div class="m-body">
+    <div class="pick-tools">
+      <button class="btn ghost" type="button" id="pkAll">Semua 117</button>
+      <button class="btn ghost" type="button" id="pkNone">Kosongkan pilihan</button>
+      <button class="btn ghost" type="button" id="pkBase" title="Hanya huruf induk tanpa diakritik">Huruf induk saja</button>
+      <input type="search" id="pkSearch" placeholder="Cari bunyi, mis. ba, ng, o…" aria-label="Cari kelas">
+    </div>
+    <div id="pkGroups"></div>
+    <p class="note warn" id="pkWarn" hidden></p>
+  </div>
+  <div class="m-foot"><span class="pick-count" id="pkCount"></span><button class="btn ghost" data-close type="button">Batal</button><button class="btn primary" type="button" id="pkApply">Terapkan</button></div>
+</dialog>
+
+<dialog class="modal" id="roundModal" aria-labelledby="rmTitle">
+  <div class="m-head"><div><h2 id="rmTitle">Putaran baru</h2><p class="sub">Setiap putaran = satu set tulisan. Tidak ada batas jumlah putaran.</p></div><button class="icon-btn" data-close type="button" aria-label="Tutup">×</button></div>
+  <div class="m-body">
+    <div class="field"><label for="rmWriter"><b>Penulis putaran ini</b></label><input type="text" id="rmWriter" maxlength="20" autocomplete="off" spellcheck="false">
+      <small>Ganti bila orang lain yang akan menulis. Satu zip dibuat untuk setiap penulis.</small></div>
+    <p class="hint warn" id="rmHint" hidden></p>
+    <div class="opt-list" role="radiogroup" aria-label="Kelas putaran baru">
+      <label class="opt"><input type="radio" name="rmKelas" value="semua" checked><span><b>Semua 117 kelas</b><small>Satu set lengkap.</small></span></label>
+      <label class="opt" id="rmSameWrap"><input type="radio" name="rmKelas" value="sama"><span><b id="rmSameTxt">Sama dengan putaran ini</b><small id="rmSameList"></small></span></label>
+      <label class="opt"><input type="radio" name="rmKelas" value="pilih"><span><b>Pilih kelas…</b><small>Tentukan sendiri kelas yang ingin diperbanyak.</small></span></label>
+    </div>
+  </div>
+  <div class="m-foot"><button class="btn ghost" data-close type="button">Batal</button><button class="btn primary" type="button" id="rmGo">Mulai putaran</button></div>
+</dialog>
+
+<dialog class="modal wide" id="exportModal" aria-labelledby="expTitle">
+  <div class="m-head"><div><h2 id="expTitle">Unduh dataset</h2><p class="sub">Satu zip untuk setiap penulis. Gambar PNG 256×256 px bernama sesuai aksaranya, mis. <code>ba/ba_01.png</code>.</p></div><button class="icon-btn" data-close type="button" aria-label="Tutup">×</button></div>
   <div class="m-body" id="expBody">
-    <div class="sum" id="expSum"></div>
-    <p class="note warn" id="expMissing" hidden></p>
-    <div class="field"><label for="writer2"><b>Kode penulis</b></label><input type="text" id="writer2" maxlength="20" autocomplete="off" spellcheck="false"></div>
+    <div class="note warn" id="expMulti" hidden></div>
+    <div class="wr-list" id="expWriters"></div>
+    <p class="note warn" id="expBlock" hidden></p>
     <label class="check"><input type="checkbox" id="expWarn" checked><span><b>Sertakan kotak bertanda "perlu dicek"</b><small>Matikan bila ingin mengirim hanya tulisan yang rapi.</small></span></label>
-    <label class="check"><input type="checkbox" id="consent"><span><b>Saya bersedia tulisan ini dipakai untuk penelitian aksara Batak Toba</b><small>Berkas hanya berisi gambar tulisan, kode penulis, jenis alat tulis (mouse/pena/sentuh), dan waktu penulisan.</small></span></label>
-    <p class="note" id="expName"></p>
+    <label class="check" id="expCheckWrap" hidden><input type="checkbox" id="expCheck"><span><b>Saya sudah memeriksa daftar penulis di atas</b><small>Nama berbeda = zip berbeda. Gabungkan nama yang sebenarnya orang yang sama sebelum mengunduh.</small></span></label>
+    <label class="check"><input type="checkbox" id="consent"><span><b>Setiap penulis di atas bersedia tulisannya dipakai untuk penelitian aksara Batak Toba</b><small>Berkas hanya berisi gambar tulisan, nama/kode penulis, jenis alat tulis (mouse/pena/sentuh), dan waktu penulisan.</small></span></label>
   </div>
   <div class="m-body done-box" id="expDone" hidden>
     <div class="big-ok"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" style="width:30px;height:30px"><path d="M5 12l5 5 9-10"/></svg></div>
     <h3 style="font-size:1.1rem">Terima kasih!</h3>
-    <p>Berkas <b id="doneFile"></b> sudah diunduh (biasanya ke folder <i>Unduhan/Downloads</i>).<br>Kirim berkas itu ke peneliti<span class="kirim-ke"></span>.</p>
+    <p><span id="doneFile"></span> sudah diunduh (biasanya ke folder <i>Unduhan/Downloads</i>).<br>Kirim berkas itu ke peneliti<span class="kirim-ke"></span>.</p>
     <p class="note" style="text-align:left">Di HP: berkas ada di aplikasi <i>File/Files</i> → <i>Download</i>. Kirim sebagai <b>dokumen/lampiran</b> (bukan foto) agar tidak dikompresi.</p>
   </div>
-  <div class="m-foot"><button class="btn ghost" data-close type="button" id="expClose">Tutup</button><button class="btn primary" id="expGo" type="button" disabled>Unduh .zip</button></div>
+  <div class="m-foot"><button class="btn ghost" data-close type="button" id="expClose">Tutup</button><button class="btn primary" id="expGo" type="button" disabled>Unduh semua</button></div>
 </dialog>
 
 <dialog class="modal" id="confirmModal" aria-labelledby="cfTitle">
   <form method="dialog">
     <div class="m-head"><h2 id="cfTitle">Kosongkan?</h2></div>
-    <div class="m-body"><p id="cfMsg"></p><p class="note">Bisa dibatalkan dengan <b>Urungkan</b> (<kbd>Ctrl</kbd>+<kbd>Z</kbd>).</p></div>
+    <div class="m-body"><p id="cfMsg"></p><p class="note" id="cfNote">Bisa dibatalkan dengan <b>Urungkan</b> (<kbd>Ctrl</kbd>+<kbd>Z</kbd>).</p></div>
     <div class="m-foot"><button class="btn ghost" value="cancel" id="cfCancel" autofocus>Batal</button><button class="btn danger-solid" value="ok" id="cfOk">Kosongkan</button></div>
   </form>
 </dialog>
 
 <script>
-const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengumpulan Tulisan Aksara Batak Toba","kelas":[{"cls":"a","latin":"a","base":"a","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯀ"},{"cls":"b","latin":"b","base":"ba","mark":"pangolat","mark_nama":"pangolat","uni":"ᯅ᯲"},{"cls":"ba","latin":"ba","base":"ba","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯅ"},{"cls":"bang","latin":"bang","base":"ba","mark":"ng","mark_nama":"hamisaran","uni":"ᯅᯰ"},{"cls":"be","latin":"be","base":"ba","mark":"e","mark_nama":"hatadingan","uni":"ᯅᯩ"},{"cls":"bi","latin":"bi","base":"ba","mark":"i","mark_nama":"hauluan","uni":"ᯅᯪ"},{"cls":"bo","latin":"bo","base":"ba","mark":"o","mark_nama":"sihora","uni":"ᯅᯬ"},{"cls":"bu","latin":"bu","base":"ba","mark":"u","mark_nama":"haborotan","uni":"ᯅᯮ"},{"cls":"d","latin":"d","base":"da","mark":"pangolat","mark_nama":"pangolat","uni":"ᯑ᯲"},{"cls":"da","latin":"da","base":"da","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯑ"},{"cls":"dang","latin":"dang","base":"da","mark":"ng","mark_nama":"hamisaran","uni":"ᯑᯰ"},{"cls":"de","latin":"de","base":"da","mark":"e","mark_nama":"hatadingan","uni":"ᯑᯩ"},{"cls":"di","latin":"di","base":"da","mark":"i","mark_nama":"hauluan","uni":"ᯑᯪ"},{"cls":"do","latin":"do","base":"da","mark":"o","mark_nama":"sihora","uni":"ᯑᯬ"},{"cls":"du","latin":"du","base":"da","mark":"u","mark_nama":"haborotan","uni":"ᯑᯮ"},{"cls":"e","latin":"e","base":"a","mark":"e","mark_nama":"hatadingan","uni":"ᯀᯩ"},{"cls":"g","latin":"g","base":"ga","mark":"pangolat","mark_nama":"pangolat","uni":"ᯎ᯲"},{"cls":"ga","latin":"ga","base":"ga","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯎ"},{"cls":"gang","latin":"gang","base":"ga","mark":"ng","mark_nama":"hamisaran","uni":"ᯎᯰ"},{"cls":"ge","latin":"ge","base":"ga","mark":"e","mark_nama":"hatadingan","uni":"ᯎᯩ"},{"cls":"gi","latin":"gi","base":"ga","mark":"i","mark_nama":"hauluan","uni":"ᯎᯪ"},{"cls":"go","latin":"go","base":"ga","mark":"o","mark_nama":"sihora","uni":"ᯎᯬ"},{"cls":"gu","latin":"gu","base":"ga","mark":"u","mark_nama":"haborotan","uni":"ᯎᯮ"},{"cls":"h","latin":"h","base":"ha","mark":"pangolat","mark_nama":"pangolat","uni":"ᯂ᯲"},{"cls":"ha","latin":"ha","base":"ha","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯂ"},{"cls":"hang","latin":"hang","base":"ha","mark":"ng","mark_nama":"hamisaran","uni":"ᯂᯰ"},{"cls":"he","latin":"he","base":"ha","mark":"e","mark_nama":"hatadingan","uni":"ᯂᯩ"},{"cls":"hi","latin":"hi","base":"ha","mark":"i","mark_nama":"hauluan","uni":"ᯂᯪ"},{"cls":"ho","latin":"ho","base":"ha","mark":"o","mark_nama":"sihora","uni":"ᯂᯬ"},{"cls":"hu","latin":"hu","base":"ha","mark":"u","mark_nama":"haborotan","uni":"ᯂᯮ"},{"cls":"i","latin":"i","base":"i","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯤ"},{"cls":"j","latin":"j","base":"ja","mark":"pangolat","mark_nama":"pangolat","uni":"ᯐ᯲"},{"cls":"ja","latin":"ja","base":"ja","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯐ"},{"cls":"jang","latin":"jang","base":"ja","mark":"ng","mark_nama":"hamisaran","uni":"ᯐᯰ"},{"cls":"je","latin":"je","base":"ja","mark":"e","mark_nama":"hatadingan","uni":"ᯐᯩ"},{"cls":"ji","latin":"ji","base":"ja","mark":"i","mark_nama":"hauluan","uni":"ᯐᯪ"},{"cls":"jo","latin":"jo","base":"ja","mark":"o","mark_nama":"sihora","uni":"ᯐᯬ"},{"cls":"ju","latin":"ju","base":"ja","mark":"u","mark_nama":"haborotan","uni":"ᯐᯮ"},{"cls":"l","latin":"l","base":"la","mark":"pangolat","mark_nama":"pangolat","uni":"ᯞ᯲"},{"cls":"la","latin":"la","base":"la","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯞ"},{"cls":"lang","latin":"lang","base":"la","mark":"ng","mark_nama":"hamisaran","uni":"ᯞᯰ"},{"cls":"le","latin":"le","base":"la","mark":"e","mark_nama":"hatadingan","uni":"ᯞᯩ"},{"cls":"li","latin":"li","base":"la","mark":"i","mark_nama":"hauluan","uni":"ᯞᯪ"},{"cls":"lo","latin":"lo","base":"la","mark":"o","mark_nama":"sihora","uni":"ᯞᯬ"},{"cls":"lu","latin":"lu","base":"la","mark":"u","mark_nama":"haborotan","uni":"ᯞᯮ"},{"cls":"m","latin":"m","base":"ma","mark":"pangolat","mark_nama":"pangolat","uni":"ᯔ᯲"},{"cls":"ma","latin":"ma","base":"ma","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯔ"},{"cls":"mang","latin":"mang","base":"ma","mark":"ng","mark_nama":"hamisaran","uni":"ᯔᯰ"},{"cls":"me","latin":"me","base":"ma","mark":"e","mark_nama":"hatadingan","uni":"ᯔᯩ"},{"cls":"mi","latin":"mi","base":"ma","mark":"i","mark_nama":"hauluan","uni":"ᯔᯪ"},{"cls":"mo","latin":"mo","base":"ma","mark":"o","mark_nama":"sihora","uni":"ᯔᯬ"},{"cls":"mu","latin":"mu","base":"ma","mark":"u","mark_nama":"haborotan","uni":"ᯔᯮ"},{"cls":"n","latin":"n","base":"na","mark":"pangolat","mark_nama":"pangolat","uni":"ᯉ᯲"},{"cls":"na","latin":"na","base":"na","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯉ"},{"cls":"nang","latin":"nang","base":"na","mark":"ng","mark_nama":"hamisaran","uni":"ᯉᯰ"},{"cls":"ne","latin":"ne","base":"na","mark":"e","mark_nama":"hatadingan","uni":"ᯉᯩ"},{"cls":"ng","latin":"ng","base":"nga","mark":"pangolat","mark_nama":"pangolat","uni":"ᯝ᯲"},{"cls":"nga","latin":"nga","base":"nga","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯝ"},{"cls":"ngang","latin":"ngang","base":"nga","mark":"ng","mark_nama":"hamisaran","uni":"ᯝᯰ"},{"cls":"nge","latin":"nge","base":"nga","mark":"e","mark_nama":"hatadingan","uni":"ᯝᯩ"},{"cls":"ngi","latin":"ngi","base":"nga","mark":"i","mark_nama":"hauluan","uni":"ᯝᯪ"},{"cls":"ngo","latin":"ngo","base":"nga","mark":"o","mark_nama":"sihora","uni":"ᯝᯬ"},{"cls":"ngu","latin":"ngu","base":"nga","mark":"u","mark_nama":"haborotan","uni":"ᯝᯮ"},{"cls":"ni","latin":"ni","base":"na","mark":"i","mark_nama":"hauluan","uni":"ᯉᯪ"},{"cls":"no","latin":"no","base":"na","mark":"o","mark_nama":"sihora","uni":"ᯉᯬ"},{"cls":"nu","latin":"nu","base":"na","mark":"u","mark_nama":"haborotan","uni":"ᯉᯮ"},{"cls":"ny","latin":"ny","base":"nya","mark":"pangolat","mark_nama":"pangolat","uni":"ᯠ᯲"},{"cls":"nya","latin":"nya","base":"nya","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯠ"},{"cls":"nyang","latin":"nyang","base":"nya","mark":"ng","mark_nama":"hamisaran","uni":"ᯠᯰ"},{"cls":"nye","latin":"nye","base":"nya","mark":"e","mark_nama":"hatadingan","uni":"ᯠᯩ"},{"cls":"nyi","latin":"nyi","base":"nya","mark":"i","mark_nama":"hauluan","uni":"ᯠᯪ"},{"cls":"nyo","latin":"nyo","base":"nya","mark":"o","mark_nama":"sihora","uni":"ᯠᯬ"},{"cls":"nyu","latin":"nyu","base":"nya","mark":"u","mark_nama":"haborotan","uni":"ᯠᯮ"},{"cls":"o","latin":"o","base":"a","mark":"o","mark_nama":"sihora","uni":"ᯀᯬ"},{"cls":"p","latin":"p","base":"pa","mark":"pangolat","mark_nama":"pangolat","uni":"ᯇ᯲"},{"cls":"pa","latin":"pa","base":"pa","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯇ"},{"cls":"pang","latin":"pang","base":"pa","mark":"ng","mark_nama":"hamisaran","uni":"ᯇᯰ"},{"cls":"pe","latin":"pe","base":"pa","mark":"e","mark_nama":"hatadingan","uni":"ᯇᯩ"},{"cls":"pi","latin":"pi","base":"pa","mark":"i","mark_nama":"hauluan","uni":"ᯇᯪ"},{"cls":"po","latin":"po","base":"pa","mark":"o","mark_nama":"sihora","uni":"ᯇᯬ"},{"cls":"pu","latin":"pu","base":"pa","mark":"u","mark_nama":"haborotan","uni":"ᯇᯮ"},{"cls":"r","latin":"r","base":"ra","mark":"pangolat","mark_nama":"pangolat","uni":"ᯒ᯲"},{"cls":"ra","latin":"ra","base":"ra","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯒ"},{"cls":"rang","latin":"rang","base":"ra","mark":"ng","mark_nama":"hamisaran","uni":"ᯒᯰ"},{"cls":"re","latin":"re","base":"ra","mark":"e","mark_nama":"hatadingan","uni":"ᯒᯩ"},{"cls":"ri","latin":"ri","base":"ra","mark":"i","mark_nama":"hauluan","uni":"ᯒᯪ"},{"cls":"ro","latin":"ro","base":"ra","mark":"o","mark_nama":"sihora","uni":"ᯒᯬ"},{"cls":"ru","latin":"ru","base":"ra","mark":"u","mark_nama":"haborotan","uni":"ᯒᯮ"},{"cls":"s","latin":"s","base":"sa","mark":"pangolat","mark_nama":"pangolat","uni":"ᯘ᯲"},{"cls":"sa","latin":"sa","base":"sa","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯘ"},{"cls":"sang","latin":"sang","base":"sa","mark":"ng","mark_nama":"hamisaran","uni":"ᯘᯰ"},{"cls":"se","latin":"se","base":"sa","mark":"e","mark_nama":"hatadingan","uni":"ᯘᯩ"},{"cls":"si","latin":"si","base":"sa","mark":"i","mark_nama":"hauluan","uni":"ᯘᯪ"},{"cls":"so","latin":"so","base":"sa","mark":"o","mark_nama":"sihora","uni":"ᯘᯬ"},{"cls":"su","latin":"su","base":"sa","mark":"u","mark_nama":"haborotan","uni":"ᯘᯮ"},{"cls":"t","latin":"t","base":"ta","mark":"pangolat","mark_nama":"pangolat","uni":"ᯖ᯲"},{"cls":"ta","latin":"ta","base":"ta","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯖ"},{"cls":"tang","latin":"tang","base":"ta","mark":"ng","mark_nama":"hamisaran","uni":"ᯖᯰ"},{"cls":"te","latin":"te","base":"ta","mark":"e","mark_nama":"hatadingan","uni":"ᯖᯩ"},{"cls":"ti","latin":"ti","base":"ta","mark":"i","mark_nama":"hauluan","uni":"ᯖᯪ"},{"cls":"to","latin":"to","base":"ta","mark":"o","mark_nama":"sihora","uni":"ᯖᯬ"},{"cls":"tu","latin":"tu","base":"ta","mark":"u","mark_nama":"haborotan","uni":"ᯖᯮ"},{"cls":"u","latin":"u","base":"u","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯥ"},{"cls":"w","latin":"w","base":"wa","mark":"pangolat","mark_nama":"pangolat","uni":"ᯋ᯲"},{"cls":"wa","latin":"wa","base":"wa","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯋ"},{"cls":"wang","latin":"wang","base":"wa","mark":"ng","mark_nama":"hamisaran","uni":"ᯋᯰ"},{"cls":"we","latin":"we","base":"wa","mark":"e","mark_nama":"hatadingan","uni":"ᯋᯩ"},{"cls":"wi","latin":"wi","base":"wa","mark":"i","mark_nama":"hauluan","uni":"ᯋᯪ"},{"cls":"wo","latin":"wo","base":"wa","mark":"o","mark_nama":"sihora","uni":"ᯋᯬ"},{"cls":"wu","latin":"wu","base":"wa","mark":"u","mark_nama":"haborotan","uni":"ᯋᯮ"},{"cls":"y","latin":"y","base":"ya","mark":"pangolat","mark_nama":"pangolat","uni":"ᯛ᯲"},{"cls":"ya","latin":"ya","base":"ya","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯛ"},{"cls":"yang","latin":"yang","base":"ya","mark":"ng","mark_nama":"hamisaran","uni":"ᯛᯰ"},{"cls":"ye","latin":"ye","base":"ya","mark":"e","mark_nama":"hatadingan","uni":"ᯛᯩ"},{"cls":"yi","latin":"yi","base":"ya","mark":"i","mark_nama":"hauluan","uni":"ᯛᯪ"},{"cls":"yo","latin":"yo","base":"ya","mark":"o","mark_nama":"sihora","uni":"ᯛᯬ"},{"cls":"yu","latin":"yu","base":"ya","mark":"u","mark_nama":"haborotan","uni":"ᯛᯮ"}],"kelompok":[{"base":"a","latin":"a","uni":"ᯀ","kelas":["a","e","o"]},{"base":"ha","latin":"ha","uni":"ᯂ","kelas":["ha","he","hi","ho","hu","hang","h"]},{"base":"ma","latin":"ma","uni":"ᯔ","kelas":["ma","me","mi","mo","mu","mang","m"]},{"base":"na","latin":"na","uni":"ᯉ","kelas":["na","ne","ni","no","nu","nang","n"]},{"base":"ra","latin":"ra","uni":"ᯒ","kelas":["ra","re","ri","ro","ru","rang","r"]},{"base":"ta","latin":"ta","uni":"ᯖ","kelas":["ta","te","ti","to","tu","tang","t"]},{"base":"sa","latin":"sa","uni":"ᯘ","kelas":["sa","se","si","so","su","sang","s"]},{"base":"pa","latin":"pa","uni":"ᯇ","kelas":["pa","pe","pi","po","pu","pang","p"]},{"base":"la","latin":"la","uni":"ᯞ","kelas":["la","le","li","lo","lu","lang","l"]},{"base":"ga","latin":"ga","uni":"ᯎ","kelas":["ga","ge","gi","go","gu","gang","g"]},{"base":"ja","latin":"ja","uni":"ᯐ","kelas":["ja","je","ji","jo","ju","jang","j"]},{"base":"da","latin":"da","uni":"ᯑ","kelas":["da","de","di","do","du","dang","d"]},{"base":"nga","latin":"nga","uni":"ᯝ","kelas":["nga","nge","ngi","ngo","ngu","ngang","ng"]},{"base":"ba","latin":"ba","uni":"ᯅ","kelas":["ba","be","bi","bo","bu","bang","b"]},{"base":"wa","latin":"wa","uni":"ᯋ","kelas":["wa","we","wi","wo","wu","wang","w"]},{"base":"ya","latin":"ya","uni":"ᯛ","kelas":["ya","ye","yi","yo","yu","yang","y"]},{"base":"nya","latin":"nya","uni":"ᯠ","kelas":["nya","nye","nyi","nyo","nyu","nyang","ny"]},{"base":"i","latin":"i","uni":"ᯤ","kelas":["i"]},{"base":"u","latin":"u","uni":"ᯥ","kelas":["u"]}],"acuan":null,"putaranAwal":1,"maksPutaran":10,"dibuat":"2026-11-03T17:33:04","kirimKe":""};
+const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.1","judul":"Pengumpulan Tulisan Aksara Batak Toba","kelas":[{"cls":"a","latin":"a","base":"a","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯀ"},{"cls":"b","latin":"b","base":"ba","mark":"pangolat","mark_nama":"pangolat","uni":"ᯅ᯲"},{"cls":"ba","latin":"ba","base":"ba","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯅ"},{"cls":"bang","latin":"bang","base":"ba","mark":"ng","mark_nama":"hamisaran","uni":"ᯅᯰ"},{"cls":"be","latin":"be","base":"ba","mark":"e","mark_nama":"hatadingan","uni":"ᯅᯩ"},{"cls":"bi","latin":"bi","base":"ba","mark":"i","mark_nama":"hauluan","uni":"ᯅᯪ"},{"cls":"bo","latin":"bo","base":"ba","mark":"o","mark_nama":"sihora","uni":"ᯅᯬ"},{"cls":"bu","latin":"bu","base":"ba","mark":"u","mark_nama":"haborotan","uni":"ᯅᯮ"},{"cls":"d","latin":"d","base":"da","mark":"pangolat","mark_nama":"pangolat","uni":"ᯑ᯲"},{"cls":"da","latin":"da","base":"da","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯑ"},{"cls":"dang","latin":"dang","base":"da","mark":"ng","mark_nama":"hamisaran","uni":"ᯑᯰ"},{"cls":"de","latin":"de","base":"da","mark":"e","mark_nama":"hatadingan","uni":"ᯑᯩ"},{"cls":"di","latin":"di","base":"da","mark":"i","mark_nama":"hauluan","uni":"ᯑᯪ"},{"cls":"do","latin":"do","base":"da","mark":"o","mark_nama":"sihora","uni":"ᯑᯬ"},{"cls":"du","latin":"du","base":"da","mark":"u","mark_nama":"haborotan","uni":"ᯑᯮ"},{"cls":"e","latin":"e","base":"a","mark":"e","mark_nama":"hatadingan","uni":"ᯀᯩ"},{"cls":"g","latin":"g","base":"ga","mark":"pangolat","mark_nama":"pangolat","uni":"ᯎ᯲"},{"cls":"ga","latin":"ga","base":"ga","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯎ"},{"cls":"gang","latin":"gang","base":"ga","mark":"ng","mark_nama":"hamisaran","uni":"ᯎᯰ"},{"cls":"ge","latin":"ge","base":"ga","mark":"e","mark_nama":"hatadingan","uni":"ᯎᯩ"},{"cls":"gi","latin":"gi","base":"ga","mark":"i","mark_nama":"hauluan","uni":"ᯎᯪ"},{"cls":"go","latin":"go","base":"ga","mark":"o","mark_nama":"sihora","uni":"ᯎᯬ"},{"cls":"gu","latin":"gu","base":"ga","mark":"u","mark_nama":"haborotan","uni":"ᯎᯮ"},{"cls":"h","latin":"h","base":"ha","mark":"pangolat","mark_nama":"pangolat","uni":"ᯂ᯲"},{"cls":"ha","latin":"ha","base":"ha","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯂ"},{"cls":"hang","latin":"hang","base":"ha","mark":"ng","mark_nama":"hamisaran","uni":"ᯂᯰ"},{"cls":"he","latin":"he","base":"ha","mark":"e","mark_nama":"hatadingan","uni":"ᯂᯩ"},{"cls":"hi","latin":"hi","base":"ha","mark":"i","mark_nama":"hauluan","uni":"ᯂᯪ"},{"cls":"ho","latin":"ho","base":"ha","mark":"o","mark_nama":"sihora","uni":"ᯂᯬ"},{"cls":"hu","latin":"hu","base":"ha","mark":"u","mark_nama":"haborotan","uni":"ᯂᯮ"},{"cls":"i","latin":"i","base":"i","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯤ"},{"cls":"j","latin":"j","base":"ja","mark":"pangolat","mark_nama":"pangolat","uni":"ᯐ᯲"},{"cls":"ja","latin":"ja","base":"ja","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯐ"},{"cls":"jang","latin":"jang","base":"ja","mark":"ng","mark_nama":"hamisaran","uni":"ᯐᯰ"},{"cls":"je","latin":"je","base":"ja","mark":"e","mark_nama":"hatadingan","uni":"ᯐᯩ"},{"cls":"ji","latin":"ji","base":"ja","mark":"i","mark_nama":"hauluan","uni":"ᯐᯪ"},{"cls":"jo","latin":"jo","base":"ja","mark":"o","mark_nama":"sihora","uni":"ᯐᯬ"},{"cls":"ju","latin":"ju","base":"ja","mark":"u","mark_nama":"haborotan","uni":"ᯐᯮ"},{"cls":"l","latin":"l","base":"la","mark":"pangolat","mark_nama":"pangolat","uni":"ᯞ᯲"},{"cls":"la","latin":"la","base":"la","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯞ"},{"cls":"lang","latin":"lang","base":"la","mark":"ng","mark_nama":"hamisaran","uni":"ᯞᯰ"},{"cls":"le","latin":"le","base":"la","mark":"e","mark_nama":"hatadingan","uni":"ᯞᯩ"},{"cls":"li","latin":"li","base":"la","mark":"i","mark_nama":"hauluan","uni":"ᯞᯪ"},{"cls":"lo","latin":"lo","base":"la","mark":"o","mark_nama":"sihora","uni":"ᯞᯬ"},{"cls":"lu","latin":"lu","base":"la","mark":"u","mark_nama":"haborotan","uni":"ᯞᯮ"},{"cls":"m","latin":"m","base":"ma","mark":"pangolat","mark_nama":"pangolat","uni":"ᯔ᯲"},{"cls":"ma","latin":"ma","base":"ma","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯔ"},{"cls":"mang","latin":"mang","base":"ma","mark":"ng","mark_nama":"hamisaran","uni":"ᯔᯰ"},{"cls":"me","latin":"me","base":"ma","mark":"e","mark_nama":"hatadingan","uni":"ᯔᯩ"},{"cls":"mi","latin":"mi","base":"ma","mark":"i","mark_nama":"hauluan","uni":"ᯔᯪ"},{"cls":"mo","latin":"mo","base":"ma","mark":"o","mark_nama":"sihora","uni":"ᯔᯬ"},{"cls":"mu","latin":"mu","base":"ma","mark":"u","mark_nama":"haborotan","uni":"ᯔᯮ"},{"cls":"n","latin":"n","base":"na","mark":"pangolat","mark_nama":"pangolat","uni":"ᯉ᯲"},{"cls":"na","latin":"na","base":"na","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯉ"},{"cls":"nang","latin":"nang","base":"na","mark":"ng","mark_nama":"hamisaran","uni":"ᯉᯰ"},{"cls":"ne","latin":"ne","base":"na","mark":"e","mark_nama":"hatadingan","uni":"ᯉᯩ"},{"cls":"ng","latin":"ng","base":"nga","mark":"pangolat","mark_nama":"pangolat","uni":"ᯝ᯲"},{"cls":"nga","latin":"nga","base":"nga","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯝ"},{"cls":"ngang","latin":"ngang","base":"nga","mark":"ng","mark_nama":"hamisaran","uni":"ᯝᯰ"},{"cls":"nge","latin":"nge","base":"nga","mark":"e","mark_nama":"hatadingan","uni":"ᯝᯩ"},{"cls":"ngi","latin":"ngi","base":"nga","mark":"i","mark_nama":"hauluan","uni":"ᯝᯪ"},{"cls":"ngo","latin":"ngo","base":"nga","mark":"o","mark_nama":"sihora","uni":"ᯝᯬ"},{"cls":"ngu","latin":"ngu","base":"nga","mark":"u","mark_nama":"haborotan","uni":"ᯝᯮ"},{"cls":"ni","latin":"ni","base":"na","mark":"i","mark_nama":"hauluan","uni":"ᯉᯪ"},{"cls":"no","latin":"no","base":"na","mark":"o","mark_nama":"sihora","uni":"ᯉᯬ"},{"cls":"nu","latin":"nu","base":"na","mark":"u","mark_nama":"haborotan","uni":"ᯉᯮ"},{"cls":"ny","latin":"ny","base":"nya","mark":"pangolat","mark_nama":"pangolat","uni":"ᯠ᯲"},{"cls":"nya","latin":"nya","base":"nya","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯠ"},{"cls":"nyang","latin":"nyang","base":"nya","mark":"ng","mark_nama":"hamisaran","uni":"ᯠᯰ"},{"cls":"nye","latin":"nye","base":"nya","mark":"e","mark_nama":"hatadingan","uni":"ᯠᯩ"},{"cls":"nyi","latin":"nyi","base":"nya","mark":"i","mark_nama":"hauluan","uni":"ᯠᯪ"},{"cls":"nyo","latin":"nyo","base":"nya","mark":"o","mark_nama":"sihora","uni":"ᯠᯬ"},{"cls":"nyu","latin":"nyu","base":"nya","mark":"u","mark_nama":"haborotan","uni":"ᯠᯮ"},{"cls":"o","latin":"o","base":"a","mark":"o","mark_nama":"sihora","uni":"ᯀᯬ"},{"cls":"p","latin":"p","base":"pa","mark":"pangolat","mark_nama":"pangolat","uni":"ᯇ᯲"},{"cls":"pa","latin":"pa","base":"pa","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯇ"},{"cls":"pang","latin":"pang","base":"pa","mark":"ng","mark_nama":"hamisaran","uni":"ᯇᯰ"},{"cls":"pe","latin":"pe","base":"pa","mark":"e","mark_nama":"hatadingan","uni":"ᯇᯩ"},{"cls":"pi","latin":"pi","base":"pa","mark":"i","mark_nama":"hauluan","uni":"ᯇᯪ"},{"cls":"po","latin":"po","base":"pa","mark":"o","mark_nama":"sihora","uni":"ᯇᯬ"},{"cls":"pu","latin":"pu","base":"pa","mark":"u","mark_nama":"haborotan","uni":"ᯇᯮ"},{"cls":"r","latin":"r","base":"ra","mark":"pangolat","mark_nama":"pangolat","uni":"ᯒ᯲"},{"cls":"ra","latin":"ra","base":"ra","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯒ"},{"cls":"rang","latin":"rang","base":"ra","mark":"ng","mark_nama":"hamisaran","uni":"ᯒᯰ"},{"cls":"re","latin":"re","base":"ra","mark":"e","mark_nama":"hatadingan","uni":"ᯒᯩ"},{"cls":"ri","latin":"ri","base":"ra","mark":"i","mark_nama":"hauluan","uni":"ᯒᯪ"},{"cls":"ro","latin":"ro","base":"ra","mark":"o","mark_nama":"sihora","uni":"ᯒᯬ"},{"cls":"ru","latin":"ru","base":"ra","mark":"u","mark_nama":"haborotan","uni":"ᯒᯮ"},{"cls":"s","latin":"s","base":"sa","mark":"pangolat","mark_nama":"pangolat","uni":"ᯘ᯲"},{"cls":"sa","latin":"sa","base":"sa","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯘ"},{"cls":"sang","latin":"sang","base":"sa","mark":"ng","mark_nama":"hamisaran","uni":"ᯘᯰ"},{"cls":"se","latin":"se","base":"sa","mark":"e","mark_nama":"hatadingan","uni":"ᯘᯩ"},{"cls":"si","latin":"si","base":"sa","mark":"i","mark_nama":"hauluan","uni":"ᯘᯪ"},{"cls":"so","latin":"so","base":"sa","mark":"o","mark_nama":"sihora","uni":"ᯘᯬ"},{"cls":"su","latin":"su","base":"sa","mark":"u","mark_nama":"haborotan","uni":"ᯘᯮ"},{"cls":"t","latin":"t","base":"ta","mark":"pangolat","mark_nama":"pangolat","uni":"ᯖ᯲"},{"cls":"ta","latin":"ta","base":"ta","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯖ"},{"cls":"tang","latin":"tang","base":"ta","mark":"ng","mark_nama":"hamisaran","uni":"ᯖᯰ"},{"cls":"te","latin":"te","base":"ta","mark":"e","mark_nama":"hatadingan","uni":"ᯖᯩ"},{"cls":"ti","latin":"ti","base":"ta","mark":"i","mark_nama":"hauluan","uni":"ᯖᯪ"},{"cls":"to","latin":"to","base":"ta","mark":"o","mark_nama":"sihora","uni":"ᯖᯬ"},{"cls":"tu","latin":"tu","base":"ta","mark":"u","mark_nama":"haborotan","uni":"ᯖᯮ"},{"cls":"u","latin":"u","base":"u","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯥ"},{"cls":"w","latin":"w","base":"wa","mark":"pangolat","mark_nama":"pangolat","uni":"ᯋ᯲"},{"cls":"wa","latin":"wa","base":"wa","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯋ"},{"cls":"wang","latin":"wang","base":"wa","mark":"ng","mark_nama":"hamisaran","uni":"ᯋᯰ"},{"cls":"we","latin":"we","base":"wa","mark":"e","mark_nama":"hatadingan","uni":"ᯋᯩ"},{"cls":"wi","latin":"wi","base":"wa","mark":"i","mark_nama":"hauluan","uni":"ᯋᯪ"},{"cls":"wo","latin":"wo","base":"wa","mark":"o","mark_nama":"sihora","uni":"ᯋᯬ"},{"cls":"wu","latin":"wu","base":"wa","mark":"u","mark_nama":"haborotan","uni":"ᯋᯮ"},{"cls":"y","latin":"y","base":"ya","mark":"pangolat","mark_nama":"pangolat","uni":"ᯛ᯲"},{"cls":"ya","latin":"ya","base":"ya","mark":"none","mark_nama":"tanpa diakritik","uni":"ᯛ"},{"cls":"yang","latin":"yang","base":"ya","mark":"ng","mark_nama":"hamisaran","uni":"ᯛᯰ"},{"cls":"ye","latin":"ye","base":"ya","mark":"e","mark_nama":"hatadingan","uni":"ᯛᯩ"},{"cls":"yi","latin":"yi","base":"ya","mark":"i","mark_nama":"hauluan","uni":"ᯛᯪ"},{"cls":"yo","latin":"yo","base":"ya","mark":"o","mark_nama":"sihora","uni":"ᯛᯬ"},{"cls":"yu","latin":"yu","base":"ya","mark":"u","mark_nama":"haborotan","uni":"ᯛᯮ"}],"kelompok":[{"base":"a","latin":"a","uni":"ᯀ","kelas":["a","e","o"]},{"base":"ha","latin":"ha","uni":"ᯂ","kelas":["ha","he","hi","ho","hu","hang","h"]},{"base":"ma","latin":"ma","uni":"ᯔ","kelas":["ma","me","mi","mo","mu","mang","m"]},{"base":"na","latin":"na","uni":"ᯉ","kelas":["na","ne","ni","no","nu","nang","n"]},{"base":"ra","latin":"ra","uni":"ᯒ","kelas":["ra","re","ri","ro","ru","rang","r"]},{"base":"ta","latin":"ta","uni":"ᯖ","kelas":["ta","te","ti","to","tu","tang","t"]},{"base":"sa","latin":"sa","uni":"ᯘ","kelas":["sa","se","si","so","su","sang","s"]},{"base":"pa","latin":"pa","uni":"ᯇ","kelas":["pa","pe","pi","po","pu","pang","p"]},{"base":"la","latin":"la","uni":"ᯞ","kelas":["la","le","li","lo","lu","lang","l"]},{"base":"ga","latin":"ga","uni":"ᯎ","kelas":["ga","ge","gi","go","gu","gang","g"]},{"base":"ja","latin":"ja","uni":"ᯐ","kelas":["ja","je","ji","jo","ju","jang","j"]},{"base":"da","latin":"da","uni":"ᯑ","kelas":["da","de","di","do","du","dang","d"]},{"base":"nga","latin":"nga","uni":"ᯝ","kelas":["nga","nge","ngi","ngo","ngu","ngang","ng"]},{"base":"ba","latin":"ba","uni":"ᯅ","kelas":["ba","be","bi","bo","bu","bang","b"]},{"base":"wa","latin":"wa","uni":"ᯋ","kelas":["wa","we","wi","wo","wu","wang","w"]},{"base":"ya","latin":"ya","uni":"ᯛ","kelas":["ya","ye","yi","yo","yu","yang","y"]},{"base":"nya","latin":"nya","uni":"ᯠ","kelas":["nya","nye","nyi","nyo","nyu","nyang","ny"]},{"base":"i","latin":"i","uni":"ᯤ","kelas":["i"]},{"base":"u","latin":"u","uni":"ᯥ","kelas":["u"]}],"acuan":null,"putaranAwal":1,"maksPutaran":0,"dibuat":"2026-11-05T16:40:33","kirimKe":""};
 </script>
 <script>
 (() => {
@@ -339,6 +446,7 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
   const pad2 = (n) => String(n).padStart(2, "0");
+  const padN = (n, w) => String(n).padStart(w, "0");
 
   // ------------------------------------------------------------------ data kelas (dibuat buat_pengumpul.py dari notebook)
   const CLASSES = DATA.kelas;                      // [{cls, latin, base, mark, mark_nama, uni}]
@@ -346,19 +454,23 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
   const BY = Object.fromEntries(CLASSES.map((c) => [c.cls, c]));
   const ORDER = GROUPS.flatMap((g) => g.kelas);
   const N = ORDER.length;
+  const MAX_ROUNDS = DATA.maksPutaran > 0 ? DATA.maksPutaran : Infinity;     // 0 = tidak dibatasi
   const EXPORT_PX = 256, REF_CELL = 128;           // sama dengan web kisi (webapp_v3): tebal pena relatif kotak 128 px
   const SIZES = ["s", "m", "l"], SIZE_LBL = { s: "Kecil", m: "Sedang", l: "Besar" };
 
   // ------------------------------------------------------------------ keadaan
+  // Putaran = satu set tulisan: { penulis, kelas: null (semua 117) | [cls…], data: { cls: {strokes, alat, t} }, dibuat }
   const S = {
-    writer: "", rounds: [{}], round: 0, tool: "pen", pen: 7, ph: "tengah", size: "m", theme: "auto", onlyEmpty: false,
+    rounds: [], round: 0, tool: "pen", pen: 7, ph: "tengah", size: "m", theme: "auto", onlyEmpty: false,
     history: [], future: [], fontOk: false, active: null,
   };
-  // data per putaran: { cls: { strokes: [{w, erase, pts: [[x,y],...]}], alat: Set-like array, t: ISO } }
   const cur = () => S.rounds[S.round];
+  const data = () => cur().data;
+  const roundClasses = (r) => (r.kelas && r.kelas.length ? ORDER.filter((c) => r.kelas.includes(c)) : ORDER);
+  const newRound = (penulis, kelas = null) => ({ penulis, kelas, data: {}, dibuat: new Date().toISOString() });
 
   // ------------------------------------------------------------------ penyimpanan otomatis (IndexedDB, cadangan localStorage)
-  const DB_KEY = `pengumpul-batak-${DATA.versi}`;
+  const DB_KEY = "pengumpul-batak-1.0";            // JANGAN diganti: sesi penulis lama tetap terbaca setelah pembaruan
   const idb = {
     db: null,
     open() {
@@ -385,9 +497,16 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
   };
   const round3 = (v) => Math.round(v * 1000) / 1000;
   const save = debounce(async () => {
-    const ok = await idb.set(DB_KEY, { writer: S.writer, rounds: S.rounds, round: S.round, pen: S.pen, ph: S.ph, size: S.size, theme: S.theme });
+    const ok = await idb.set(DB_KEY, { format: 2, rounds: S.rounds, round: S.round, pen: S.pen, ph: S.ph, size: S.size, theme: S.theme });
     if (!ok) banner("Penyimpanan otomatis gagal (memori browser penuh?). Unduh dataset sekarang agar tulisan tidak hilang.");
   }, 500);
+  // sesi versi 1.0: rounds = [{cls: data}] + satu kode penulis → dipindah ke format putaran ber-penulis
+  function migrate(saved) {
+    const rounds = (saved.rounds || []).map((r) => (r && typeof r === "object" && "data" in r
+      ? { penulis: cleanWriter(r.penulis || ""), kelas: Array.isArray(r.kelas) ? r.kelas.filter((c) => BY[c]) : null, data: r.data || {}, dibuat: r.dibuat || "" }
+      : { penulis: cleanWriter(saved.writer || ""), kelas: null, data: r || {}, dibuat: "" }));
+    return rounds.filter(Boolean);
+  }
 
   // ------------------------------------------------------------------ UI umum
   function announce(m) { const a = $("#announcer"); a.textContent = ""; setTimeout(() => { a.textContent = m; }, 30); }
@@ -401,9 +520,9 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
   }
   function banner(msg) { $("#bannerMsg").textContent = msg || ""; $("#banner").hidden = !msg; }
   $("#bannerX").addEventListener("click", () => banner(""));
-  function confirmDialog(title, msg, ok = "Kosongkan") {
+  function confirmDialog(title, msg, ok = "Kosongkan", undoable = true) {
     const d = $("#confirmModal");
-    $("#cfTitle").textContent = title; $("#cfMsg").textContent = msg; $("#cfOk").textContent = ok;
+    $("#cfTitle").textContent = title; $("#cfMsg").textContent = msg; $("#cfOk").textContent = ok; $("#cfNote").hidden = !undoable;
     return new Promise((res) => {
       const done = () => { d.removeEventListener("close", done); res(d.returnValue === "ok"); };
       d.returnValue = "cancel"; d.addEventListener("close", done); d.showModal(); $("#cfCancel").focus();
@@ -425,6 +544,30 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
     requestAnimationFrame(sizeVisible);
   }
   mq.addEventListener?.("change", applyLook);
+
+  // ------------------------------------------------------------------ nama penulis
+  const cleanWriter = (s) => String(s || "").trim().replace(/\s+/g, "_").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 20);
+  function lev(a, b) {                              // jarak edit (untuk mendeteksi salah ketik nama)
+    const m = a.length, n = b.length, d = Array.from({ length: m + 1 }, (_, i) => [i, ...Array(n).fill(0)]);
+    for (let j = 1; j <= n; j++) d[0][j] = j;
+    for (let i = 1; i <= m; i++) for (let j = 1; j <= n; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    return d[m][n];
+  }
+  const similar = (a, b) => { const x = a.toLowerCase().replace(/[_-]/g, ""), y = b.toLowerCase().replace(/[_-]/g, ""); return x === y || (Math.min(x.length, y.length) >= 3 && lev(x, y) <= (Math.max(x.length, y.length) >= 6 ? 2 : 1)); };
+  const filled = (r, cls) => { const d = r.data[cls]; return !!(d && d.strokes.some((s) => !s.erase)); };
+  const roundFilled = (r) => roundClasses(r).filter((cls) => filled(r, cls));
+  function writersSummary() {                      // {nama: {rounds:[i…], sets, images}}
+    const out = new Map();
+    S.rounds.forEach((r, i) => {
+      const n = roundFilled(r).length;
+      const key = r.penulis || "";
+      if (!out.has(key)) out.set(key, { nama: key, rounds: [], sets: 0, images: 0 });
+      const w = out.get(key);
+      w.rounds.push(i);
+      if (n) { w.sets++; w.images += n; }
+    });
+    return [...out.values()];
+  }
 
   // ------------------------------------------------------------------ font Batak (tertanam di berkas ini oleh buat_pengumpul.py)
   async function detectFont() {
@@ -473,8 +616,6 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
     if (dark < 3) return Promise.resolve(null);                                    // terhapus seluruhnya → kosong
     return new Promise((res) => cv.toBlob((b) => b.arrayBuffer().then((a) => res(new Uint8Array(a))), "image/png"));
   }
-
-  // pemeriksaan mutu sederhana (dari koordinat goresan)
   function quality(strokes) {
     const ink = strokes.filter((s) => !s.erase);
     if (!ink.length) return [];
@@ -493,8 +634,8 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
     return out;
   }
 
-  // ------------------------------------------------------------------ papan kisi
-  const els = new Map();                          // cls → {root, pad, canvas, lab}
+  // ------------------------------------------------------------------ papan kisi (hanya kelas putaran aktif)
+  const els = new Map();
   const io = new IntersectionObserver((ents) => {
     for (const e of ents) {
       const cls = e.target.dataset.cls, E = els.get(cls);
@@ -505,20 +646,25 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
   }, { root: $("#scroll"), rootMargin: "300px 0px" });
   function buildBoard() {
     const board = $("#board"), jump = $("#jump");
-    board.replaceChildren(); jump.replaceChildren(); els.clear();
-    for (const g of GROUPS) {
+    io.disconnect(); board.replaceChildren(); jump.replaceChildren(); els.clear();
+    const allowed = new Set(roundClasses(cur()));
+    const compact = allowed.size < 12;               // sedikit kelas → satu kisi, tanpa baris per kelompok
+    const groups = compact ? [{ base: "pilihan", latin: `${allowed.size} kelas terpilih`, uni: "", kelas: ORDER }] : GROUPS;
+    for (const g of groups) {
+      const members = g.kelas.filter((c) => allowed.has(c));
+      if (!members.length) continue;
       const cells = h("div", { class: "cells", role: "list" });
       const sec = h("section", { class: "grp", id: `g-${g.base}`, "aria-label": `Kelompok ${g.latin}` },
         h("div", { class: "grp-h" }, h("span", { class: "g", "aria-hidden": "true", text: S.fontOk ? g.uni : "" }), h("b", { text: g.latin }),
           h("small", { class: "gcount" })), cells);
-      for (const cls of g.kelas) {
+      for (const cls of members) {
         const c = BY[cls];
         const canvas = h("canvas", { "aria-hidden": "true" });
         const x = h("button", { class: "x", type: "button", "aria-label": `Kosongkan kotak ${c.latin}`, title: "Kosongkan kotak" }, "×");
         const pad = h("div", { class: "pad" }, placeholder(c), h("div", { class: "guides" }), canvas, x);
         const lab = h("div", { class: "lab" }, h("span", {}, h("b", { text: c.latin }), " ", h("small", { text: c.mark === "none" ? "" : c.mark_nama })), h("span", { class: "st", "aria-hidden": "true" }));
         const root = h("div", { class: "cell", role: "listitem", tabindex: "0", dataset: { cls } }, pad, lab);
-        els.set(cls, { root, pad, canvas, lab, visible: false });
+        els.set(cls, { root, pad, canvas, lab, visible: false, group: g.base });
         attachDrawing(cls, canvas);
         x.addEventListener("click", (e) => { e.stopPropagation(); clearCell(cls); });
         root.addEventListener("focus", () => { S.active = cls; });
@@ -529,6 +675,7 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
       jump.append(h("button", { type: "button", dataset: { base: g.base }, title: `Ke kelompok ${g.latin}`,
         onclick: () => { $(`#g-${g.base}`).scrollIntoView({ block: "start" }); } }, h("b", { text: S.fontOk ? g.uni : "" }), g.latin, h("small", { class: "jc" })));
     }
+    $("#jump").hidden = allowed.size < 8;
     refreshAll();
   }
   function sizeCell(cls) {
@@ -544,41 +691,64 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
     if (!E || E.canvas.width < 2) return;
     const ctx = E.canvas.getContext("2d");
     ctx.clearRect(0, 0, E.canvas.width, E.canvas.height);
-    const d = cur()[cls];
+    const d = data()[cls];
     if (d) paint(ctx, d.strokes, E.canvas.width, inkColor(), null);
   }
-  const filled = (round, cls) => { const d = round[cls]; return !!(d && d.strokes.some((s) => !s.erase)); };
   function refreshCell(cls) {
     const E = els.get(cls), c = BY[cls];
     if (!E) return;
-    const d = cur()[cls], f = filled(cur(), cls), q = f ? quality(d.strokes) : [];
+    const d = data()[cls], f = filled(cur(), cls), q = f ? quality(d.strokes) : [];
     E.root.classList.toggle("filled", f);
     E.root.classList.toggle("warn", q.length > 0);
     E.root.title = q.length ? `Perlu dicek: ${q.join(", ")}` : "";
     E.root.setAttribute("aria-label", `Kotak ${c.latin}${c.mark === "none" ? "" : ` (${c.mark_nama})`}: ${f ? "terisi" : "belum diisi"}${q.length ? `, perlu dicek: ${q.join(", ")}` : ""}`);
   }
   function refreshSummary() {
-    const r = cur();
-    const n = ORDER.filter((cls) => filled(r, cls)).length;
-    $("#pillTxt").textContent = `${n} / ${N}`; $("#pillBar").style.width = `${(100 * n) / N}%`;
-    $("#nFilled").textContent = n; $("#meter").style.width = `${(100 * n) / N}%`; $("#roundNo").textContent = S.round + 1;
-    $("#allDone").hidden = n < N;
-    for (const g of GROUPS) {
-      const k = g.kelas.filter((cls) => filled(r, cls)).length;
+    const r = cur(), list = roundClasses(r), tot = list.length;
+    const n = list.filter((cls) => filled(r, cls)).length;
+    $("#pillTxt").textContent = `${n} / ${tot}`; $("#pillBar").style.width = `${(100 * n) / tot}%`;
+    $("#nFilled").textContent = n; $("#nTotal").textContent = tot; $("#meter").style.width = `${(100 * n) / tot}%`;
+    $("#roundNo").textContent = S.round + 1;
+    $("#allDone").hidden = n < tot;
+    $("#kelasTxt").textContent = tot === N ? `Semua ${N} kelas` : `${tot} kelas dipilih`;
+    $("#kelasList").textContent = tot === N ? "set lengkap" : list.map((c) => BY[c].latin).join(", ");
+    $("#btnDelRound").hidden = S.rounds.length < 2;
+    if (document.activeElement !== $("#writer")) $("#writer").value = r.penulis;
+    writerHint();
+    for (const g of [...GROUPS, { base: "pilihan", kelas: ORDER }]) {
       const sec = $(`#g-${g.base}`);
-      sec.querySelector(".gcount").textContent = `${k}/${g.kelas.length}`;
-      sec.classList.toggle("complete", k === g.kelas.length);
+      if (!sec) continue;
+      const members = g.kelas.filter((c) => els.has(c));
+      const k = members.filter((cls) => filled(r, cls)).length;
+      sec.querySelector(".gcount").textContent = `${k}/${members.length}`;
+      sec.classList.toggle("complete", k === members.length);
       const jb = $(`#jump [data-base="${g.base}"]`);
-      jb.classList.toggle("done", k === g.kelas.length); jb.querySelector(".jc").textContent = ` ${k}/${g.kelas.length}`;
+      if (jb) { jb.classList.toggle("done", k === members.length); jb.querySelector(".jc").textContent = ` ${k}/${members.length}`; }
     }
-    const iss = ORDER.filter((cls) => filled(r, cls)).map((cls) => [cls, quality(r[cls].strokes)]).filter(([, q]) => q.length);
+    const iss = list.filter((cls) => filled(r, cls)).map((cls) => [cls, quality(r.data[cls].strokes)]).filter(([, q]) => q.length);
     const box = $("#issues"); box.replaceChildren();
     $("#nIssues").textContent = iss.length ? `(${iss.length})` : "";
     if (!iss.length) box.append(h("p", { class: "note", text: "Belum ada." }));
     iss.slice(0, 40).forEach(([cls, q]) => box.append(h("button", { type: "button", onclick: () => focusCell(cls) }, h("b", { text: BY[cls].latin }), ` — ${q.join(", ")}`)));
+    const ws = writersSummary().filter((w) => w.sets || w.rounds.includes(S.round));
+    const wbox = $("#writers"); wbox.replaceChildren();
+    wbox.classList.toggle("multi", ws.length > 1);
+    ws.forEach((w) => wbox.append(h("div", {}, h("b", { text: w.nama || "(tanpa nama)" }), h("span", { text: `${w.sets} set · ${w.images} gambar` }))));
     renderRounds();
   }
-  function refreshAll() { ORDER.forEach(refreshCell); refreshSummary(); sizeVisible(); }
+  function writerHint() {
+    const r = cur(), hint = $("#writerHint");
+    const others = [...new Set(S.rounds.filter((x, i) => i !== S.round && roundFilled(x).length).map((x) => x.penulis))].filter(Boolean);
+    let msg = "";
+    if (!r.penulis) msg = "Isi nama penulis putaran ini.";
+    else if (others.length && !others.includes(r.penulis)) {
+      const sim = others.find((o) => similar(o, r.penulis));
+      msg = sim ? `Mirip dengan "${sim}" di putaran lain — salah ketik? Nama berbeda akan menjadi zip berbeda.`
+        : `Penulis berbeda dari putaran lain (${others.slice(0, 3).join(", ")}). Benar orang lain yang menulis?`;
+    }
+    hint.textContent = msg; hint.hidden = !msg;
+  }
+  function refreshAll() { [...els.keys()].forEach(refreshCell); refreshSummary(); sizeVisible(); }
   function focusCell(cls) {
     const E = els.get(cls);
     if (!E) return;
@@ -586,18 +756,25 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
     E.root.scrollIntoView({ block: "center" }); E.root.focus({ preventScroll: true }); S.active = cls;
   }
   function renderRounds() {
-    const box = $("#rounds"); box.replaceChildren();
+    const box = $("#rounds"), ws = writersSummary().filter((w) => w.sets).length;
+    box.replaceChildren();
     S.rounds.forEach((r, i) => {
-      const n = ORDER.filter((cls) => filled(r, cls)).length;
-      box.append(h("button", { class: "round-tab", type: "button", role: "tab", "aria-selected": String(i === S.round),
-        onclick: () => { if (i !== S.round) { S.round = i; S.history = []; S.future = []; updateUndo(); refreshAll(); save(); } } },
-      `Putaran ${i + 1}`, h("small", { text: `${n}/${N}` })));
+      const n = roundFilled(r).length, tot = roundClasses(r).length;
+      box.append(h("button", { class: `round-tab${ws > 1 ? " multi" : ""}`, type: "button", role: "tab", "aria-selected": String(i === S.round),
+        title: `Putaran ${i + 1} · ${r.penulis || "tanpa nama"} · ${n}/${tot}${tot < N ? ` (${tot} kelas)` : ""}`,
+        onclick: () => switchRound(i) },
+      h("span", { class: "rt-top", text: `P${i + 1} · ${n}/${tot}` }), h("span", { class: "rt-sub", text: r.penulis || "tanpa nama" })));
     });
-    $("#btnAddRound").disabled = S.rounds.length >= DATA.maksPutaran;
+    if (S.rounds.length < MAX_ROUNDS) box.append(h("button", { class: "round-tab add", type: "button", title: "Tambah putaran", onclick: openRoundModal }, "+ Putaran"));
+    box.querySelector('[aria-selected="true"]')?.scrollIntoView({ block: "nearest", inline: "nearest" });
+    $("#btnAddRound").disabled = S.rounds.length >= MAX_ROUNDS;
+  }
+  function switchRound(i) {
+    if (i === S.round) return;
+    S.round = i; S.history = []; S.future = []; updateUndo(); buildBoard(); $("#scroll").scrollTo({ top: 0 }); save();
   }
 
   // ------------------------------------------------------------------ menulis
-  let pointerKinds = new Set();
   function attachDrawing(cls, canvas) {
     let st = null, pid = null, before = null;
     const pos = (e) => { const r = canvas.getBoundingClientRect(); return [round3(clamp((e.clientX - r.left) / r.width, 0, 1)), round3(clamp((e.clientY - r.top) / r.height, 0, 1))]; };
@@ -605,12 +782,12 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
       if (e.button !== 0 && e.pointerType === "mouse") return;
       e.preventDefault(); closePop();
       pid = e.pointerId; canvas.setPointerCapture(pid);
-      const r = cur();
-      before = r[cls] ? JSON.stringify(r[cls]) : null;
-      r[cls] = r[cls] || { strokes: [], alat: [], t: "" };
+      const d = data();
+      before = d[cls] ? JSON.stringify(d[cls]) : null;
+      d[cls] = d[cls] || { strokes: [], alat: [], t: "" };
       st = { w: (S.tool === "eraser" ? S.pen * 2.6 : S.pen) / REF_CELL, erase: S.tool === "eraser", pts: [pos(e)] };
-      r[cls].strokes.push(st);
-      if (!r[cls].alat.includes(e.pointerType || "mouse")) r[cls].alat.push(e.pointerType || "mouse");
+      d[cls].strokes.push(st);
+      if (!d[cls].alat.includes(e.pointerType || "mouse")) d[cls].alat.push(e.pointerType || "mouse");
       S.active = cls; drawCell(cls);
     });
     canvas.addEventListener("pointermove", (e) => {
@@ -624,12 +801,12 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
     const end = (e) => {
       if (!st || e.pointerId !== pid) return;
       st = null; pid = null;
-      const r = cur();
-      r[cls].t = new Date().toISOString();
-      if (!filled(r, cls)) delete r[cls];
-      pushHistory(cls, before, r[cls] ? JSON.stringify(r[cls]) : null);
+      const d = data();
+      d[cls].t = new Date().toISOString();
+      if (!filled(cur(), cls)) delete d[cls];
+      pushHistory(cls, before, d[cls] ? JSON.stringify(d[cls]) : null);
       refreshCell(cls); refreshSummary(); save();
-      if (filled(r, cls)) announce(`${BY[cls].latin} terisi`);
+      if (filled(cur(), cls)) announce(`${BY[cls].latin} terisi`);
     };
     canvas.addEventListener("pointerup", end); canvas.addEventListener("pointercancel", end);
   }
@@ -640,38 +817,120 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
   }
   function applySnap(rec, val) {
     const r = S.rounds[rec.round];
-    if (val) r[rec.cls] = JSON.parse(val); else delete r[rec.cls];
-    if (rec.round !== S.round) { S.round = rec.round; refreshAll(); } else { drawCell(rec.cls); refreshCell(rec.cls); refreshSummary(); }
+    if (!r) return;
+    if (val) r.data[rec.cls] = JSON.parse(val); else delete r.data[rec.cls];
+    if (rec.round !== S.round) { S.round = rec.round; buildBoard(); } else { drawCell(rec.cls); refreshCell(rec.cls); refreshSummary(); }
     save();
   }
   function undo() {
     const rec = S.history.pop(); if (!rec) return;
-    if (rec.batch) { rec.batch.forEach((b) => { const r = S.rounds[b.round]; if (b.before) r[b.cls] = JSON.parse(b.before); else delete r[b.cls]; }); S.round = rec.batch[0]?.round ?? S.round; refreshAll(); save(); }
+    if (rec.batch) { rec.batch.forEach((b) => { const r = S.rounds[b.round]; if (r) { if (b.before) r.data[b.cls] = JSON.parse(b.before); else delete r.data[b.cls]; } }); buildBoard(); save(); }
     else applySnap(rec, rec.before);
     S.future.push(rec); updateUndo();
   }
   function redo() {
     const rec = S.future.pop(); if (!rec) return;
-    if (rec.batch) { rec.batch.forEach((b) => { delete S.rounds[b.round][b.cls]; }); refreshAll(); save(); }
+    if (rec.batch) { rec.batch.forEach((b) => { const r = S.rounds[b.round]; if (r) delete r.data[b.cls]; }); buildBoard(); save(); }
     else applySnap(rec, rec.after);
     S.history.push(rec); updateUndo();
   }
   function updateUndo() { $("#btnUndo").disabled = !S.history.length; $("#btnRedo").disabled = !S.future.length; }
   function clearCell(cls) {
-    const r = cur(); if (!r[cls]) return;
-    const before = JSON.stringify(r[cls]); delete r[cls];
+    const d = data(); if (!d[cls]) return;
+    const before = JSON.stringify(d[cls]); delete d[cls];
     pushHistory(cls, before, null); drawCell(cls); refreshCell(cls); refreshSummary(); save();
     toast(`Kotak ${BY[cls].latin} dikosongkan.`, 4000, { label: "Urungkan", fn: undo });
   }
   async function clearRound() {
-    const r = cur(), keys = Object.keys(r).filter((cls) => filled(r, cls));
+    const r = cur(), keys = Object.keys(r.data).filter((cls) => filled(r, cls));
     if (!keys.length) { toast("Putaran ini masih kosong."); return; }
     if (!(await confirmDialog(`Kosongkan putaran ${S.round + 1}?`, `${keys.length} kotak yang sudah ditulis di putaran ini akan dikosongkan.`))) return;
-    const batch = keys.map((cls) => ({ round: S.round, cls, before: JSON.stringify(r[cls]) }));
-    keys.forEach((cls) => delete r[cls]);
+    const batch = keys.map((cls) => ({ round: S.round, cls, before: JSON.stringify(r.data[cls]) }));
+    keys.forEach((cls) => delete r.data[cls]);
     S.history.push({ batch }); S.future.length = 0; updateUndo();
-    refreshAll(); ORDER.forEach(drawCell); save();
+    buildBoard(); save();
     toast("Putaran dikosongkan.", 5000, { label: "Urungkan", fn: undo });
+  }
+  async function deleteRound() {
+    if (S.rounds.length < 2) return;
+    const r = cur(), n = roundFilled(r).length;
+    if (n && !(await confirmDialog(`Hapus putaran ${S.round + 1}?`, `Putaran ini (${r.penulis || "tanpa nama"}) berisi ${n} tulisan. Putaran dan tulisannya akan dihapus permanen; nomor putaran sesudahnya bergeser.`, "Hapus putaran", false))) return;
+    S.rounds.splice(S.round, 1);
+    S.round = clamp(S.round, 0, S.rounds.length - 1); S.history = []; S.future = []; updateUndo();
+    buildBoard(); save(); toast("Putaran dihapus.");
+  }
+
+  // ------------------------------------------------------------------ putaran baru
+  function openRoundModal() {
+    if (S.rounds.length >= MAX_ROUNDS) return;
+    const r = cur(), sub = r.kelas && r.kelas.length && r.kelas.length < N;
+    $("#rmTitle").textContent = `Putaran baru (ke-${S.rounds.length + 1})`;
+    $("#rmWriter").value = r.penulis;
+    $("#rmSameWrap").hidden = !sub;
+    if (sub) { $("#rmSameTxt").textContent = `Sama dengan putaran ini (${r.kelas.length} kelas)`; $("#rmSameList").textContent = roundClasses(r).map((c) => BY[c].latin).join(", "); }
+    $$('input[name="rmKelas"]').forEach((x) => { x.checked = x.value === (sub ? "sama" : "semua"); });
+    rmHint();
+    $("#roundModal").showModal(); $("#rmWriter").select();
+  }
+  function rmHint() {
+    const w = cleanWriter($("#rmWriter").value), others = [...new Set(S.rounds.map((x) => x.penulis).filter(Boolean))];
+    const sim = others.find((o) => o !== w && similar(o, w));
+    const hint = $("#rmHint");
+    hint.textContent = !w ? "Isi nama penulis." : sim ? `Mirip dengan penulis "${sim}" — salah ketik? Nama berbeda = zip berbeda.`
+      : (others.length && !others.includes(w) ? `Penulis baru (berbeda dari: ${others.slice(0, 3).join(", ")}) — akan menjadi zip tersendiri.` : "");
+    hint.hidden = !hint.textContent;
+    $("#rmGo").disabled = !w;
+  }
+  function startRound() {
+    const w = cleanWriter($("#rmWriter").value);
+    if (!w) return;
+    const mode = $('input[name="rmKelas"]:checked').value;
+    const kelas = mode === "sama" ? [...cur().kelas] : null;
+    S.rounds.push(newRound(w, kelas)); S.round = S.rounds.length - 1; S.history = []; S.future = []; updateUndo();
+    $("#roundModal").close();
+    buildBoard(); $("#scroll").scrollTo({ top: 0 }); save();
+    toast(`Putaran ${S.round + 1} dimulai — penulis ${w}.`, 3000);
+    if (mode === "pilih") openPick();
+  }
+
+  // ------------------------------------------------------------------ pilih kelas
+  let pickSel = new Set();
+  function openPick() {
+    pickSel = new Set(roundClasses(cur()));
+    $("#pickTitle").textContent = `Pilih kelas aksara — putaran ${S.round + 1}`;
+    $("#pkSearch").value = "";
+    renderPick(); $("#pickModal").showModal();
+  }
+  function renderPick() {
+    const box = $("#pkGroups"), q = $("#pkSearch").value.trim().toLowerCase();
+    box.replaceChildren();
+    for (const g of GROUPS) {
+      const all = g.kelas.every((c) => pickSel.has(c)), some = g.kelas.some((c) => pickSel.has(c));
+      const cb = h("input", { type: "checkbox", "aria-label": `Semua kelas ${g.latin}` });
+      cb.checked = all; cb.indeterminate = some && !all;
+      cb.addEventListener("change", () => { g.kelas.forEach((c) => (cb.checked ? pickSel.add(c) : pickSel.delete(c))); renderPick(); });
+      const chips = h("div", { class: "chips" });
+      g.kelas.forEach((cls) => {
+        const c = BY[cls], has = filled(cur(), cls);
+        const b = h("button", { class: `chip${q && !cls.startsWith(q) && !c.latin.startsWith(q) ? " dim" : ""}`, type: "button", "aria-pressed": String(pickSel.has(cls)),
+          title: `${c.latin}${c.mark === "none" ? "" : ` (${c.mark_nama})`}${has ? " — sudah ditulis" : ""}` },
+        h("span", { class: "cg", "aria-hidden": "true", text: S.fontOk ? c.uni : "" }), h("span", { class: "cl", text: c.latin }), has ? h("span", { class: "cd", text: "✓ ditulis" }) : null);
+        b.addEventListener("click", () => { pickSel.has(cls) ? pickSel.delete(cls) : pickSel.add(cls); renderPick(); });
+        chips.append(b);
+      });
+      box.append(h("div", { class: "pick-grp" }, h("label", {}, cb, h("span", { class: "g", "aria-hidden": "true", text: S.fontOk ? g.uni : "" }), g.latin), chips));
+    }
+    const n = pickSel.size, lost = Object.keys(cur().data).filter((c) => filled(cur(), c) && !pickSel.has(c));
+    $("#pkCount").textContent = n === N ? `Semua ${N} kelas dipilih` : `${n} kelas dipilih`;
+    $("#pkApply").disabled = !n;
+    $("#pkWarn").hidden = !lost.length;
+    $("#pkWarn").textContent = lost.length ? `${lost.length} kotak yang sudah ditulis (${lost.slice(0, 8).map((c) => BY[c].latin).join(", ")}${lost.length > 8 ? ", …" : ""}) tidak dipilih: tulisannya disimpan, tetapi disembunyikan dan TIDAK ikut diunduh sampai kelasnya dipilih lagi.` : "";
+  }
+  function applyPick() {
+    if (!pickSel.size) return;
+    cur().kelas = pickSel.size === N ? null : ORDER.filter((c) => pickSel.has(c));
+    $("#pickModal").close(); buildBoard(); save();
+    toast(pickSel.size === N ? "Putaran ini memakai semua 117 kelas." : `Putaran ini hanya ${pickSel.size} kelas.`);
   }
 
   // ------------------------------------------------------------------ popover tebal pena
@@ -689,7 +948,7 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
   }
   document.addEventListener("pointerdown", (e) => { if (!pop.hidden && !pop.contains(e.target) && !e.target.closest("#btnWidth")) closePop(); });
 
-  // ------------------------------------------------------------------ unduh dataset (.zip tanpa kompresi)
+  // ------------------------------------------------------------------ unduh dataset: satu zip per penulis
   const CRC_T = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
   function crc32(b) { let c = 0xffffffff; for (let i = 0; i < b.length; i++) c = CRC_T[(c ^ b[i]) & 0xff] ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; }
   function makeZip(files) {
@@ -698,11 +957,11 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
     const dosD = ((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate();
     let off = 0;
     for (const f of files) {
-      const nm = enc.encode(f.name), data = f.data, crc = crc32(data), n = data.length;
+      const nm = enc.encode(f.name), dat = f.data, crc = crc32(dat), n = dat.length;
       const lh = new DataView(new ArrayBuffer(30));
       lh.setUint32(0, 0x04034b50, true); lh.setUint16(4, 20, true); lh.setUint16(6, 0x0800, true); lh.setUint16(10, dosT, true); lh.setUint16(12, dosD, true);
       lh.setUint32(14, crc, true); lh.setUint32(18, n, true); lh.setUint32(22, n, true); lh.setUint16(26, nm.length, true);
-      parts.push(new Uint8Array(lh.buffer), nm, data);
+      parts.push(new Uint8Array(lh.buffer), nm, dat);
       const ch = new DataView(new ArrayBuffer(46));
       ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint16(8, 0x0800, true); ch.setUint16(12, dosT, true); ch.setUint16(14, dosD, true);
       ch.setUint32(16, crc, true); ch.setUint32(20, n, true); ch.setUint32(24, n, true); ch.setUint16(28, nm.length, true); ch.setUint32(42, off, true);
@@ -713,71 +972,128 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
     end.setUint32(0, 0x06054b50, true); end.setUint16(8, files.length, true); end.setUint16(10, files.length, true); end.setUint32(12, cd, true); end.setUint32(16, off, true);
     return new Blob([...parts, ...central, new Uint8Array(end.buffer)], { type: "application/zip" });
   }
-  const cleanWriter = (s) => String(s || "").trim().replace(/\s+/g, "_").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 20);
   const stamp = () => { const d = new Date(); return `${d.getFullYear()}${pad2(d.getMonth() + 1)}${pad2(d.getDate())}-${pad2(d.getHours())}${pad2(d.getMinutes())}`; };
   const csv = (rows) => "﻿" + rows.map((r) => r.map((v) => (/[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v))).join(",")).join("\r\n") + "\r\n";
-  function exportPlan() {
-    const inclWarn = $("#expWarn").checked, items = [];
-    S.rounds.forEach((r, ri) => ORDER.forEach((cls) => {
-      if (!filled(r, cls)) return;
-      const q = quality(r[cls].strokes);
-      if (q.length && !inclWarn) return;
-      items.push({ ri, cls, q, d: r[cls], file: `${cls}/${cls}_${pad2(ri + 1)}.png` });
-    }));
-    return items;
-  }
-  function openExport() {
-    $("#expBody").hidden = false; $("#expDone").hidden = true; $("#expGo").hidden = false; $("#expClose").textContent = "Batal";
-    $("#writer2").value = S.writer;
-    const sum = $("#expSum"); sum.replaceChildren();
-    let missingTxt = [];
-    S.rounds.forEach((r, i) => {
-      const done = ORDER.filter((cls) => filled(r, cls));
-      sum.append(h("div", {}, h("span", { text: `Putaran ${i + 1}` }), h("b", { text: `${done.length} / ${N} aksara` })));
-      const miss = ORDER.filter((cls) => !filled(r, cls));
-      if (miss.length && miss.length < N) missingTxt.push(`Putaran ${i + 1} belum lengkap (${miss.length}): ${miss.slice(0, 15).map((c) => BY[c].latin).join(", ")}${miss.length > 15 ? ", …" : ""}`);
+  // rencana unduh per penulis: putaran ber-isi → set ke-1..k; nomor berkas per kelas berurutan tanpa celah
+  function exportPlans() {
+    const inclWarn = $("#expWarn").checked, by = new Map();
+    S.rounds.forEach((r, ri) => {
+      const cells = roundFilled(r).map((cls) => ({ cls, q: quality(r.data[cls].strokes), d: r.data[cls] })).filter((x) => inclWarn || !x.q.length);
+      if (!cells.length) return;
+      if (!by.has(r.penulis)) by.set(r.penulis, { nama: r.penulis, rounds: [], items: [] });
+      const p = by.get(r.penulis);
+      p.rounds.push(ri);
+      cells.forEach((x) => p.items.push({ ...x, ri, set: p.rounds.length }));
     });
-    $("#expMissing").hidden = !missingTxt.length;
-    $("#expMissing").textContent = missingTxt.join(" · ") + (missingTxt.length ? " — boleh diunduh sekarang; yang kosong tidak ikut." : "");
-    updateExport();
-    $("#exportModal").showModal();
+    const stampNow = stamp();
+    for (const p of by.values()) {
+      const cnt = {}, kelas = new Set(p.items.map((x) => x.cls));
+      const width = Math.max(2, String(Math.max(...[...kelas].map((c) => p.items.filter((x) => x.cls === c).length))).length);
+      p.items.forEach((x) => { cnt[x.cls] = (cnt[x.cls] || 0) + 1; x.no = cnt[x.cls]; x.file = `${x.cls}/${x.cls}_${padN(x.no, width)}.png`; });
+      p.kelas = ORDER.filter((c) => kelas.has(c));
+      p.sets = p.rounds.length;
+      const label = p.kelas.length === N ? `${N}kelas` : `${p.kelas.length}kelas${p.kelas.length <= 4 ? "-" + [...p.kelas].sort().join("-") : ""}`;
+      p.zip = `aksara_${p.nama || "tanpa-nama"}_${label}_${p.sets}set_${stampNow}.zip`;
+    }
+    return [...by.values()];
   }
-  function updateExport() {
-    const w = cleanWriter($("#writer2").value), items = exportPlan();
-    $("#expName").textContent = items.length
-      ? `Akan dibuat: aksara_${w || "tanpa-kode"}_${stamp()}.zip — ${items.length} gambar (${new Set(items.map((x) => x.cls)).size} kelas), folder per aksara + metadata.csv.`
-      : "Belum ada tulisan untuk diunduh.";
-    $("#expGo").disabled = !(items.length && w && $("#consent").checked);
+  function similarPairs(names) {
+    const out = [];
+    for (let i = 0; i < names.length; i++) for (let j = i + 1; j < names.length; j++) if (names[i] && names[j] && similar(names[i], names[j])) out.push([names[i], names[j]]);
+    return out;
   }
-  async function doExport() {
-    const w = cleanWriter($("#writer2").value);
-    S.writer = w; $("#writer").value = w; save();
-    const items = exportPlan();
-    if (!items.length || !w || !$("#consent").checked) return;
-    $("#expGo").disabled = true; $("#expGo").textContent = "Membuat…";
-    const files = [], rows = [["file", "kelas", "latin", "unicode", "putaran", "kode_penulis", "alat", "jumlah_goresan", "peringatan", "waktu_tulis"]];
-    let blank = 0;
-    for (const it of items) {
+  function renameWriter(from, to) {
+    to = cleanWriter(to);
+    if (!to) return;
+    S.rounds.forEach((r) => { if (r.penulis === from) r.penulis = to; });
+    save(); refreshSummary(); renderExport();
+    toast(`"${from}" diganti menjadi "${to}".`);
+  }
+  const doneZips = new Set();
+  function openExport() {
+    doneZips.clear();
+    $("#expBody").hidden = false; $("#expDone").hidden = true; $("#expGo").hidden = false; $("#expClose").textContent = "Tutup";
+    $("#expCheck").checked = false;
+    renderExport(); $("#exportModal").showModal();
+  }
+  function renderExport() {
+    const plans = exportPlans(), names = plans.map((p) => p.nama);
+    const box = $("#expWriters"); box.replaceChildren();
+    if (!plans.length) box.append(h("p", { class: "note", text: "Belum ada tulisan untuk diunduh." }));
+    plans.forEach((p) => {
+      const rn = h("input", { type: "text", value: p.nama, maxlength: "20", "aria-label": `Ganti nama penulis ${p.nama}` });
+      const rnRow = h("div", { class: "rn", hidden: true }, rn, h("button", { class: "btn ghost", type: "button", text: "Simpan", onclick: () => renameWriter(p.nama, rn.value) }));
+      const rlist = p.rounds.map((i) => i + 1);
+      box.append(h("div", { class: `wr${doneZips.has(p.zip) ? " done" : ""}` },
+        h("div", {}, h("b", { text: p.nama || "(tanpa nama)" }), h("div", { class: "meta",
+          text: `${p.sets} set (putaran ${rlist.length > 6 ? rlist.slice(0, 6).join(", ") + ", …" : rlist.join(", ")}) · ${p.kelas.length === N ? "117 kelas lengkap" : `${p.kelas.length} kelas`} · ${p.items.length} gambar` })),
+        h("div", { class: "acts" },
+          h("button", { class: "btn ghost", type: "button", text: "Ganti nama", onclick: () => { rnRow.hidden = !rnRow.hidden; if (!rnRow.hidden) rn.select(); } }),
+          h("button", { class: "btn primary", type: "button", text: doneZips.has(p.zip) ? "Unduh lagi" : "Unduh zip", disabled: !canExport(plans) || !p.nama, onclick: () => downloadPlan(p) })),
+        h("div", { class: "fname", text: p.zip }), rnRow));
+    });
+    const multi = $("#expMulti"), sims = similarPairs(names);
+    multi.replaceChildren(); multi.hidden = plans.length < 2;
+    if (plans.length > 1) {
+      multi.append(h("b", { text: `Terdeteksi ${plans.length} penulis berbeda dalam ${S.rounds.length} putaran — akan dibuat ${plans.length} zip.` }),
+        h("div", { text: plans.map((p) => `${p.nama || "(tanpa nama)"}: ${p.sets} set`).join(" · ") }));
+      if (sims.length) {
+        const sbox = h("div", { class: "similar" });
+        sims.forEach(([a, b]) => sbox.append(h("div", {}, `Nama mirip: "${a}" dan "${b}" — salah ketik?`,
+          h("button", { class: "btn ghost", type: "button", text: `Jadikan "${a}"`, onclick: () => renameWriter(b, a) }),
+          h("button", { class: "btn ghost", type: "button", text: `Jadikan "${b}"`, onclick: () => renameWriter(a, b) }))));
+        multi.append(sbox);
+      }
+    }
+    $("#expCheckWrap").hidden = plans.length < 2;
+    const unnamed = plans.some((p) => !p.nama);
+    $("#expBlock").hidden = !unnamed;
+    $("#expBlock").textContent = unnamed ? "Ada putaran berisi tulisan tanpa nama penulis. Buka putaran itu dan isi namanya (atau pakai Ganti nama di atas)." : "";
+    $("#expGo").textContent = plans.length > 1 ? `Unduh semua (${plans.length} zip)` : "Unduh zip";
+    $("#expGo").disabled = !plans.length || !canExport(plans);
+  }
+  const canExport = (plans) => $("#consent").checked && !plans.some((p) => !p.nama) && (plans.length < 2 || $("#expCheck").checked);
+  async function buildZip(p) {
+    const files = [], rows = [["file", "kelas", "latin", "unicode", "set_ke", "putaran", "kode_penulis", "alat", "jumlah_goresan", "peringatan", "waktu_tulis"]];
+    for (const it of p.items) {
       const png = await exportPng(it.d.strokes);
-      if (!png) { blank++; continue; }
+      if (!png) continue;
       files.push({ name: it.file, data: png });
       rows.push([it.file, it.cls, BY[it.cls].latin, [...(BY[it.cls].uni || "")].map((ch) => "U+" + ch.codePointAt(0).toString(16).toUpperCase()).join(" "),
-        it.ri + 1, w, (it.d.alat || []).join("+"), it.d.strokes.filter((s) => !s.erase).length, it.q.join("; "), it.d.t || ""]);
+        it.set, it.ri + 1, p.nama, (it.d.alat || []).join("+"), it.d.strokes.filter((s) => !s.erase).length, it.q.join("; "), it.d.t || ""]);
     }
-    if (!files.length) { $("#expGo").textContent = "Unduh .zip"; toast("Semua kotak ternyata kosong (terhapus)."); return; }
-    const info = { aplikasi: DATA.app, versi: DATA.versi, kode_penulis: w, persetujuan_penelitian: true, jumlah_gambar: files.length,
-      putaran: S.rounds.length, ukuran_px: EXPORT_PX, format: "PNG latar putih tinta hitam, <kelas>/<kelas>_<putaran 2 digit>.png",
-      kelas: N, dibuat: new Date().toISOString() };
+    if (!files.length) return null;
     const enc = new TextEncoder();
+    const info = { aplikasi: DATA.app, versi: DATA.versi, kode_penulis: p.nama, persetujuan_penelitian: true, jumlah_gambar: files.length,
+      jumlah_set: p.sets, putaran: p.rounds.map((i) => i + 1), cakupan: p.kelas.length === N ? "117 kelas" : "sebagian kelas",
+      jumlah_kelas: p.kelas.length, kelas: p.kelas, ukuran_px: EXPORT_PX,
+      format: "PNG latar putih tinta hitam, <kelas>/<kelas>_<nomor>.png (nomor = urutan set penulis untuk kelas itu)", dibuat: new Date().toISOString() };
     files.push({ name: "metadata.csv", data: enc.encode(csv(rows)) });
     files.push({ name: "info.json", data: enc.encode(JSON.stringify(info, null, 2)) });
-    files.push({ name: "BACA_SAYA.txt", data: enc.encode(`Berkas ini berisi tulisan aksara Batak Toba untuk penelitian.\r\nKirim berkas .zip ini (tanpa diubah) ke peneliti${DATA.kirimKe ? ` — ${DATA.kirimKe}` : ""}.\r\nTerima kasih!\r\n`) });
-    const name = `aksara_${w}_${stamp()}.zip`;
-    const a = h("a", { href: URL.createObjectURL(makeZip(files)), download: name });
-    document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
-    $("#expGo").textContent = "Unduh .zip";
-    $("#expBody").hidden = true; $("#expDone").hidden = false; $("#doneFile").textContent = name; $("#expGo").hidden = true; $("#expClose").textContent = "Selesai";
-    announce(`Dataset diunduh: ${name}`);
+    files.push({ name: "BACA_SAYA.txt", data: enc.encode(`Tulisan aksara Batak Toba oleh ${p.nama}: ${p.sets} set, ${p.kelas.length} kelas, ${files.length - 2} gambar.\r\nKirim berkas .zip ini (tanpa diubah) ke peneliti${DATA.kirimKe ? ` — ${DATA.kirimKe}` : ""}.\r\nTerima kasih!\r\n`) });
+    return makeZip(files);
+  }
+  async function downloadPlan(p) {
+    const blob = await buildZip(p);
+    if (!blob) { toast(`Tulisan ${p.nama} ternyata kosong (terhapus).`); return false; }
+    const a = h("a", { href: URL.createObjectURL(blob), download: p.zip });
+    document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 2000);
+    doneZips.add(p.zip); renderExport();
+    announce(`Diunduh: ${p.zip}`);
+    return true;
+  }
+  async function downloadAll() {
+    const plans = exportPlans();
+    if (!canExport(plans)) return;
+    $("#expGo").disabled = true; $("#expGo").textContent = "Membuat…";
+    const ok = [];
+    for (const p of plans) {
+      if (await downloadPlan(p)) ok.push(p.zip);
+      await new Promise((r) => setTimeout(r, 700));          // jeda agar browser mengizinkan beberapa unduhan
+    }
+    if (!ok.length) { renderExport(); return; }
+    $("#expBody").hidden = true; $("#expDone").hidden = false; $("#expGo").hidden = true; $("#expClose").textContent = "Selesai";
+    $("#doneFile").textContent = ok.length > 1 ? `${ok.length} berkas (${ok.join(", ")})` : `Berkas ${ok[0]}`;
   }
 
   // ------------------------------------------------------------------ papan ketik
@@ -794,7 +1110,7 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
     if (e.key.toLowerCase() === "e") { S.tool = "eraser"; applyLook(); return; }
     const cell = e.target.closest?.(".cell");
     if (!cell) return;
-    const vis = ORDER.filter((cls) => els.get(cls).root.offsetParent !== null), i = vis.indexOf(cell.dataset.cls);
+    const vis = [...els.keys()].filter((cls) => els.get(cls).root.offsetParent !== null), i = vis.indexOf(cell.dataset.cls);
     if (["ArrowRight", "ArrowDown"].includes(e.key)) { e.preventDefault(); if (vis[i + 1]) focusCell(vis[i + 1]); }
     else if (["ArrowLeft", "ArrowUp"].includes(e.key)) { e.preventDefault(); if (vis[i - 1]) focusCell(vis[i - 1]); }
     else if (e.key === "Delete" || e.key === "Backspace") { e.preventDefault(); clearCell(cell.dataset.cls); }
@@ -810,41 +1126,43 @@ const DATA = {"app":"pengumpul-aksara-batak-toba","versi":"1.0","judul":"Pengump
     $("#btnOnlyEmpty").addEventListener("click", () => { S.onlyEmpty = !S.onlyEmpty; applyLook(); });
     $("#btnSize").addEventListener("click", () => { S.size = SIZES[(SIZES.indexOf(S.size) + 1) % 3]; applyLook(); save(); });
     $("#btnClearRound").addEventListener("click", clearRound);
+    $("#btnDelRound").addEventListener("click", deleteRound);
     $("#btnTheme").addEventListener("click", () => { S.theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark"; applyLook(); save(); });
     $("#btnHelp").addEventListener("click", () => $("#helpModal").showModal());
     $("#btnExport").addEventListener("click", openExport); $("#btnExport2").addEventListener("click", openExport);
-    $("#btnAddRound").addEventListener("click", () => {
-      if (S.rounds.length >= DATA.maksPutaran) return;
-      S.rounds.push({}); S.round = S.rounds.length - 1; S.history = []; S.future = []; updateUndo();
-      refreshAll(); ORDER.forEach(drawCell); $("#scroll").scrollTo({ top: 0 }); save();
-      toast(`Putaran ${S.round + 1} dimulai — tulis setiap aksara sekali lagi. Berkasnya bernomor _${pad2(S.round + 1)}.`, 4000);
-    });
-    $("#writer").addEventListener("input", (e) => { S.writer = cleanWriter(e.target.value); save(); });
-    $("#writer").addEventListener("change", (e) => { e.target.value = S.writer; });
-    $("#writer2").addEventListener("input", updateExport);
-    $("#consent").addEventListener("change", updateExport); $("#expWarn").addEventListener("change", updateExport);
-    $("#expGo").addEventListener("click", doExport);
+    $("#btnAddRound").addEventListener("click", openRoundModal);
+    $("#btnPick").addEventListener("click", openPick); $("#btnPick2").addEventListener("click", openPick);
+    $("#pkAll").addEventListener("click", () => { pickSel = new Set(ORDER); renderPick(); });
+    $("#pkNone").addEventListener("click", () => { pickSel = new Set(); renderPick(); });
+    $("#pkBase").addEventListener("click", () => { pickSel = new Set(ORDER.filter((c) => BY[c].mark === "none")); renderPick(); });
+    $("#pkSearch").addEventListener("input", renderPick);
+    $("#pkApply").addEventListener("click", applyPick);
+    $("#rmWriter").addEventListener("input", rmHint);
+    $("#rmGo").addEventListener("click", startRound);
+    $("#writer").addEventListener("input", (e) => { cur().penulis = cleanWriter(e.target.value); writerHint(); save(); });
+    $("#writer").addEventListener("change", (e) => { e.target.value = cur().penulis; refreshSummary(); });
+    ["#consent", "#expWarn", "#expCheck"].forEach((s) => $(s).addEventListener("change", renderExport));
+    $("#expGo").addEventListener("click", downloadAll);
     $("#scroll").addEventListener("scroll", closePop, { passive: true });
     new ResizeObserver(debounce(sizeVisible, 80)).observe($("#scroll"));
   }
   async function init() {
     document.title = DATA.judul || document.title;
+    if (DATA.judul) $("#appTitle").textContent = DATA.judul;
     $$(".kirim-ke").forEach((e) => { e.textContent = DATA.kirimKe ? ` (${DATA.kirimKe})` : " — misalnya lewat email, WhatsApp, atau flashdisk"; });
     $("#verInfo").textContent = `versi ${DATA.versi} · dibuat ${String(DATA.dibuat).slice(0, 10)}`;
-    if (DATA.judul) $("#appTitle").textContent = DATA.judul;
     const saved = await idb.get(DB_KEY);
-    if (saved && Array.isArray(saved.rounds) && saved.rounds.length) {
-      Object.assign(S, { writer: saved.writer || "", rounds: saved.rounds, round: clamp(saved.round || 0, 0, saved.rounds.length - 1),
-        pen: saved.pen || 7, ph: saved.ph || "tengah", size: saved.size || "m", theme: saved.theme || "auto" });
+    const rounds = saved ? migrate(saved) : [];
+    if (rounds.length) {
+      Object.assign(S, { rounds, round: clamp(saved.round || 0, 0, rounds.length - 1), pen: saved.pen || 7, ph: saved.ph || "tengah", size: saved.size || "m", theme: saved.theme || "auto" });
     } else {
-      S.rounds = Array.from({ length: DATA.putaranAwal || 1 }, () => ({}));
-      S.writer = "P-" + Math.random().toString(36).slice(2, 6).toUpperCase();
+      const w = "P-" + Math.random().toString(36).slice(2, 6).toUpperCase();
+      S.rounds = Array.from({ length: Math.min(DATA.putaranAwal || 1, MAX_ROUNDS) }, () => newRound(w));
     }
-    $("#writer").value = S.writer;
     applyLook(); bind();
     await detectFont();
     buildBoard(); updateUndo();
-    const any = S.rounds.some((r) => Object.keys(r).length);
+    const any = S.rounds.some((r) => Object.keys(r.data).length);
     if (any) toast("Tulisan sebelumnya dipulihkan — silakan lanjutkan.", 3500);
     else $("#helpModal").showModal();
   }
